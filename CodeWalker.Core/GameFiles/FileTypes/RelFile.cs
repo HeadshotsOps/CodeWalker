@@ -22029,7 +22029,7 @@ namespace CodeWalker.GameFiles
 
         public class AssembleResult
         {
-            public byte[] Bytecode { get; set; } = Array.Empty<byte>();
+            public byte[] Bytecode { get; set; }// = Array.Empty<byte>();
             public int BuffersCount { get; set; }
             public int RegistersCount { get; set; }
             public int StateBlocksCount { get; set; }

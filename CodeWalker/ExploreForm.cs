@@ -15,8 +15,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 using System.Xml;
 using WeifenLuo.WinFormsUI.Docking;
+using Path = System.IO.Path;
 
 namespace CodeWalker
 {
@@ -150,6 +152,8 @@ namespace CodeWalker
                         root.Name = Path.GetFileName(Path.GetDirectoryName(folderPath));
                         root.IsExtraFolder = true;
                         ExtraRootFolders.Add(root);
+                       
+                 
                     }
                 }
             }
@@ -241,6 +245,16 @@ namespace CodeWalker
                         Scenarios.EnsureScenarioTypes(FileCache);
 
                         UpdateStatus("File cache loaded.");
+
+                        foreach (var extraroot in ExtraRootFolders)
+                        {
+                            string[] entries = Directory.GetFileSystemEntries(extraroot.FullPath, "*", SearchOption.AllDirectories);
+                            foreach (var entry in entries)
+                            {
+                                string fileName = Path.GetFileNameWithoutExtension(entry);
+                                JenkIndex.Ensure(fileName);
+                            }
+                        }
                     }
                 }
             });
@@ -702,6 +716,9 @@ namespace CodeWalker
                 if (Directory.Exists(extraroot.FullPath))
                 {
                     RefreshMainTreeViewRoot(extraroot);
+
+                    
+                    
                 }
                 else
                 {
@@ -718,6 +735,9 @@ namespace CodeWalker
             Ready = true;
 
             MainTreeViewRefreshComplete();
+           
+
+                
         }
         private void RefreshMainTreeViewRoot(MainTreeFolder f)
         {
@@ -3273,6 +3293,13 @@ namespace CodeWalker
             root.Name = Path.GetFileName(Path.GetDirectoryName(folderPath));
             root.IsExtraFolder = true;
             ExtraRootFolders.Add(root);
+            string[] entries = Directory.GetFileSystemEntries(folderPath, "*", SearchOption.AllDirectories);
+
+            foreach (var entry in entries)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(entry);
+                JenkIndex.Ensure(fileName);
+            }
 
             Task.Run(() =>
             {

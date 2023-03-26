@@ -3603,6 +3603,58 @@ namespace CodeWalker.Project
 
             return outEnt;
         }
+        public YmapEntityDef NewMloEntity(MloArchetype mloArchetype, int roomIndex, CEntityDef entityDef, bool copyTransform = false, bool selectNew = true)
+        {
+            CurrentArchetype = mloArchetype;
+
+            var mloInstance = TryGetMloInstance(mloArchetype);
+            if (mloInstance == null)
+            {
+                MessageBox.Show("Unable to find MLO instance for this interior! Try adding an MLO instance ymap to the project.");
+                return null;
+            }
+
+            var createindex = mloArchetype.entities.Length;
+            var ment = new MCEntityDef(ref entityDef, mloArchetype);
+            var outEnt = mloInstance.CreateYmapEntity(mloInstance.Owner, ment, createindex);
+
+            try
+            {
+                if (WorldForm != null)
+                {
+                    lock (WorldForm.RenderSyncRoot) //don't try to do this while rendering...
+                    {
+                        mloArchetype.AddEntity(outEnt, roomIndex);
+                        mloInstance.AddEntity(outEnt);
+                        outEnt.SetArchetype(GameFileCache.GetArchetype(entityDef.archetypeName));
+                    }
+                }
+                else
+                {
+                    mloArchetype.AddEntity(outEnt, roomIndex);
+                    mloInstance.AddEntity(outEnt);
+                    outEnt.SetArchetype(GameFileCache.GetArchetype(entityDef.archetypeName));
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(this, e.Message, "Create MLO Entity Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
+            ment = mloInstance.TryGetArchetypeEntity(outEnt);
+
+            if (selectNew)
+            {
+                LoadProjectTree();
+                ProjectExplorer?.TrySelectMloEntityTreeNode(ment);
+                CurrentEntity = outEnt;
+                CurrentMloEntity = ment;
+                CurrentYtypFile = CurrentEntity.MloParent?.Archetype?.Ytyp;
+            }
+
+            return outEnt;
+        }
         public MCMloRoomDef NewMloRoom(MCMloRoomDef copy = null)
         {
             var mlo = CurrentMloRoom?.OwnerMlo ?? CurrentMloPortal?.OwnerMlo ?? CurrentMloEntitySet?.OwnerMlo ?? (CurrentEntity?.MloParent.Archetype as MloArchetype) ?? (CurrentArchetype as MloArchetype);
@@ -3765,32 +3817,32 @@ namespace CodeWalker.Project
 
             return true;
         }
-        public bool DeleteMloEntity()
+        public bool DeleteMloEntity(YmapEntityDef mloEntity)
         {
-            if (CurrentEntity?.MloParent?.Archetype?.Ytyp == null) return false;
-            if (CurrentEntity.MloParent.Archetype.Ytyp != CurrentYtypFile) return false;
-            if (!(CurrentEntity.MloParent.Archetype is MloArchetype mloArchetype)) return false;
+            if (mloEntity?.MloParent?.Archetype?.Ytyp == null) return false;
+            if (mloEntity.MloParent.Archetype.Ytyp != CurrentYtypFile) return false;
+            if (!(mloEntity.MloParent.Archetype is MloArchetype mloArchetype)) return false;
             if (mloArchetype.entities == null) return false; //nothing to delete..
             //if (mloArchetype.InstancedEntities == null) return false; //nothing to delete..
 
-            if (CurrentEntity._CEntityDef.numChildren != 0)
+            if (mloEntity._CEntityDef.numChildren != 0)
             {
                 MessageBox.Show("This entity's numChildren is not 0 - deleting entities with children is not currently supported by CodeWalker.");
                 return true;
             }
 
-            //if (MessageBox.Show("Are you sure you want to delete this entity?\n" + CurrentEntity._CEntityDef.archetypeName.ToString() + "\n" + CurrentEntity.Position.ToString() + "\n\nThis operation cannot be undone. Continue?", "Confirm delete", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            //if (MessageBox.Show("Are you sure you want to delete this entity?\n" + mloEntity._CEntityDef.archetypeName.ToString() + "\n" + mloEntity.Position.ToString() + "\n\nThis operation cannot be undone. Continue?", "Confirm delete", MessageBoxButtons.YesNo) != DialogResult.Yes)
             //{
             //    return true;
             //}
 
-            MloInstanceData mloInstance = CurrentEntity.MloParent.MloInstance;
+            MloInstanceData mloInstance = mloEntity.MloParent.MloInstance;
             if (mloInstance == null) return false;
 
 
-            var delent = CurrentEntity; //CurrentEntity could get changed when we remove the tree node..
-            var delytyp = CurrentEntity.MloParent.Archetype.Ytyp;
-            var mcEnt = mloInstance.TryGetArchetypeEntity(CurrentEntity);
+            var delent = mloEntity; //mloEntity could get changed when we remove the tree node..
+            var delytyp = mloEntity.MloParent.Archetype.Ytyp;
+            var mcEnt = mloInstance.TryGetArchetypeEntity(mloEntity);
 
             ProjectExplorer?.RemoveMloEntityTreeNode(mcEnt);
             ProjectExplorer?.SetYtypHasChanged(delytyp, true);
@@ -3820,7 +3872,7 @@ namespace CodeWalker.Project
 
 
             ClosePanel((EditYmapEntityPanel p) => { return p.Tag == delent; });
-            CurrentEntity = null;
+            mloEntity = null;
             CurrentMloEntity = null;
 
             if (WorldForm != null)
@@ -3829,6 +3881,10 @@ namespace CodeWalker.Project
             }
 
             return true;
+        }
+        public bool DeleteMloEntity()
+        {
+            return DeleteMloEntity(CurrentEntity);
         }
         public bool DeleteMloRoom()
         {

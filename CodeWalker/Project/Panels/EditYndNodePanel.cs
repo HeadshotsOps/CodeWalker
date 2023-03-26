@@ -603,7 +603,13 @@ namespace CodeWalker.Project.Panels
             else
             {
                 //try lookup the link node from the space.
-                if (ProjectForm.WorldForm != null)
+                YndFile yndFile = ProjectForm.CurrentProjectFile.YndFiles.FirstOrDefault(ynd => ynd.AreaID == areaid);
+                if (yndFile is object && nodeid < yndFile.Nodes.Length)
+                {
+                    linknode = yndFile.Nodes[nodeid];
+                }
+               
+                if (linknode == null && ProjectForm.WorldForm != null)
                 {
                     linknode = ProjectForm.WorldForm.GetPathNodeFromSpace(areaid, nodeid);
                 }

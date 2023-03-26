@@ -15,6 +15,7 @@ using CodeWalker.Rendering;
 using CodeWalker.GameFiles;
 using CodeWalker.Properties;
 using CodeWalker.Tools;
+using System.IO;
 
 namespace CodeWalker
 {
@@ -58,8 +59,8 @@ namespace CodeWalker
         int startupviewmode = 0; //0=world, 1=ymap, 2=model
         string modelname = "dt1_tc_dufo_core";//"dt1_11_fount_decal";//"v_22_overlays";//
         string[] ymaplist;
-
-        Vector3 prevworldpos = new Vector3(0, 0, 100); //also the start pos
+        //-345.02, 6273.81, 55.74
+        Vector3 prevworldpos = new Vector3(-345, 6273, 56); //also the start pos
 
 
         public GameFileCache GameFileCache { get { return gameFileCache; } }
@@ -7690,6 +7691,63 @@ namespace CodeWalker
         {
             SubtitleTimer.Enabled = false;
             SubtitleLabel.Visible = false;
+        }
+
+
+        private byte[] GetFileData(MainListItem file)
+        {
+            byte[] data = null;
+            if (file.Folder != null)
+            {
+                var entry = file.Folder.RpfFile?.ParentFileEntry;
+                if (entry != null)
+                {
+                    data = entry.File.ExtractFile(entry);//extract an RPF from another.
+                }
+                else if (!string.IsNullOrEmpty(file.FullPath) && (file.Folder.RpfFile != null))
+                {
+                    data = File.ReadAllBytes(file.FullPath); //load RPF file from filesystem
+                }
+            }
+            else if (file.File != null) //load file from RPF
+            {
+                if (file.File.File != null) //need the reference to the RPF archive
+                {
+                    data = file.File.File.ExtractFile(file.File);
+                }
+                else
+                { }
+            }
+            else if (!string.IsNullOrEmpty(file.FullPath))
+            {
+                data = File.ReadAllBytes(file.FullPath); //load file from filesystem
+            }
+            else
+            { }
+            return data;
+        }
+
+
+        private void btnExportXml_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (SelectedItem.Drawable == null || !(SelectedItem.Drawable.Owner is YdrFile))
+            {
+                return;
+            }
+            YdrFile ydr = SelectedItem.Drawable.Owner as YdrFile;
+            saveFileDialog.FileName = ydr.Name + ".xml";
+
+            
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+              
+                string fileName = "";
+                byte[] data = ydr.RpfFileEntry.File.ExtractFile(ydr.RpfFileEntry);
+                string xml = MetaXml.GetXml(ydr.RpfFileEntry, data , out fileName);
+                File.WriteAllText(path, xml);
+            }
         }
     }
 
