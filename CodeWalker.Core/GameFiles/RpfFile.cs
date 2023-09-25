@@ -1722,24 +1722,24 @@ namespace CodeWalker.GameFiles
             }
 
 
-            if (isrpf)
-            {
-                //importing a raw RPF archive. create the new RpfFile object, and read its headers etc.
-                RpfFile file = new RpfFile(name, rpath, data.LongLength);
-                file.Parent = parent;
-                file.ParentFileEntry = entry as RpfBinaryFileEntry;
-                file.StartPos = parent.StartPos + (entry.FileOffset * 512);
-                parent.Children.Add(file);
+            //if (isrpf)
+            //{
+            //    //importing a raw RPF archive. create the new RpfFile object, and read its headers etc.
+            //    RpfFile file = new RpfFile(name, rpath, data.LongLength);
+            //    file.Parent = parent;
+            //    file.ParentFileEntry = entry as RpfBinaryFileEntry;
+            //    file.StartPos = parent.StartPos + (entry.FileOffset * 512);
+            //    parent.Children.Add(file);
 
-                using (var fstream = File.OpenRead(fpath))
-                {
-                    using (var br = new BinaryReader(fstream))
-                    {
-                        fstream.Position = file.StartPos;
-                        file.ScanStructure(br, null, null);
-                    }
-                }
-            }
+            //    using (var fstream = File.OpenRead(fpath))
+            //    {
+            //        using (var br = new BinaryReader(fstream))
+            //        {
+            //            fstream.Position = file.StartPos;
+            //            file.ScanStructure(br, null, null);
+            //        }
+            //    }
+            //}
 
             return entry;
         }

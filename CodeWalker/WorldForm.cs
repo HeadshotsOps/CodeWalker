@@ -16,6 +16,16 @@ using CodeWalker.GameFiles;
 using CodeWalker.Properties;
 using CodeWalker.Tools;
 using System.IO;
+using Microsoft.Win32;
+using System.Net.Http;
+using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
+using Path = System.IO.Path;
+using System.CodeDom;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
+using System.Windows.Shapes;
+using CodeWalker.CustomExtensions;
 
 namespace CodeWalker
 {
@@ -6996,6 +7006,11 @@ namespace CodeWalker
             Renderer.ShowScriptedYmaps = WorldScriptedYmapsCheckBox.Checked;
         }
 
+        private void WorldNorthYanktonYmapsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Renderer.ShowNorthYankton = WorldNorthYanktonYmapsCheckBox.Checked;
+        }
+
         private void WorldYmapTimeFilterCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             worldymaptimefilter = WorldYmapTimeFilterCheckBox.Checked;
@@ -7727,7 +7742,30 @@ namespace CodeWalker
             return data;
         }
 
-
+        private RpfFileEntry CreateFileEntry(string name, string path, ref byte[] data)
+        {
+            //this should only really be used when loading a file from the filesystem.
+            RpfFileEntry e = null;
+            uint rsc7 = (data?.Length > 4) ? BitConverter.ToUInt32(data, 0) : 0;
+            if (rsc7 == 0x37435352) //RSC7 header present! create RpfResourceFileEntry and decompress data...
+            {
+                e = RpfFile.CreateResourceFileEntry(ref data, 0);//"version" should be loadable from the header in the data..
+                data = ResourceBuilder.Decompress(data);
+            }
+            else
+            {
+                var be = new RpfBinaryFileEntry();
+                be.FileSize = (uint)data?.Length;
+                be.FileUncompressedSize = be.FileSize;
+                e = be;
+            }
+            e.Name = name;
+            e.NameLower = name?.ToLowerInvariant();
+            e.NameHash = JenkHash.GenHash(e.NameLower);
+            e.ShortNameHash = JenkHash.GenHash(Path.GetFileNameWithoutExtension(e.NameLower));
+            e.Path = path;
+            return e;
+        }
         private void btnExportXml_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -7744,10 +7782,102 @@ namespace CodeWalker
                 string path = saveFileDialog.FileName;
               
                 string fileName = "";
-                byte[] data = ydr.RpfFileEntry.File.ExtractFile(ydr.RpfFileEntry);
+                byte[] data;
+
+                if (ydr.RpfFileEntry.File is null)
+                {
+                    data = File.ReadAllBytes(ydr.FilePath);
+                    ydr.RpfFileEntry = CreateFileEntry(ydr.Name, ydr.FilePath, ref data);
+                }
+                else
+                {
+                    data = ydr.RpfFileEntry.File.ExtractFile(ydr.RpfFileEntry);
+                }
+          
                 string xml = MetaXml.GetXml(ydr.RpfFileEntry, data , out fileName);
                 File.WriteAllText(path, xml);
             }
+        }
+
+        private GameFileType? DetermineFileType(MapSelection selectedObject)
+        {
+            if (SelectedItem.Drawable != null && !(SelectedItem.Drawable.Owner is YftFile))
+            {
+                return GameFileType.Ydr;
+            }
+            else if (SelectedItem.CollisionBounds != null)
+            {
+                return GameFileType.Ybn;
+            }
+            return null;
+        }
+        private async void btnOpenInBlender_Click(object sender, EventArgs e)
+        {
+            var fileType = DetermineFileType(SelectedItem);
+            if (fileType is null)
+            {
+                MessageBox.Show("Only Ydr and Ybn is supported atm");
+                return;
+            }
+
+            GameFile selectedFile = null;
+            switch (fileType)
+            {
+                case GameFileType.Ydr:
+                    selectedFile = SelectedItem.Drawable.Owner as YdrFile;
+                    break;
+                case GameFileType.Ybn:
+                    selectedFile = SelectedItem.CollisionBounds.Parent.OwnerYbn;
+                    break;
+                default:
+                    break;
+            }
+
+            string filePath = selectedFile.FilePath != null ? selectedFile.FilePath : "rpf:\\" + selectedFile.RpfFileEntry.Path;
+
+            await SdkGameFileService.GameFileToXml(filePath);
+            await SdkGameFileService.LoadInBlender(filePath);
+        }
+
+        private async void LoadYmapInBlender()
+        {
+            var fileType = DetermineFileType(SelectedItem);
+            if (fileType is null)
+            {
+                MessageBox.Show("Only Ydr and Ybn is supported atm");
+                return;
+            }
+            if (fileType != GameFileType.Ydr)
+            {
+                MessageBox.Show("Select an entity to exports its ymap");
+                return;
+            }
+            
+            YmapFile ymapFile = SelectedItem.EntityDef.Ymap;
+            HashSet<MetaHash> alreadyExported = new HashSet<MetaHash>();
+            foreach (var entity in ymapFile.CEntityDefs)
+            {
+                var archetypeName = entity.archetypeName;
+                if (alreadyExported.Contains(archetypeName))
+                {
+                    continue;
+                }
+                alreadyExported.Add(archetypeName);
+                YdrFile ydr = GameFileCache.GetYdr(archetypeName);
+                if (ydr == null)
+                {
+                    continue;
+                }
+                string filePath = ydr.FilePath != null ? ydr.FilePath : "rpf:\\" + ydr.RpfFileEntry.Path;
+                await SdkGameFileService.GameFileToXml(filePath);
+                await SdkGameFileService.LoadInBlender(filePath);
+            }
+            //await SdkGameFileService.LoadInBlender(ydr.FilePath);
+        }
+
+        private void btnExportYmap_Click(object sender, EventArgs e)
+        {
+            LoadYmapInBlender();
         }
     }
 

@@ -93,6 +93,7 @@ namespace CodeWalker.Rendering
         public Dictionary<uint, YmapEntityDef> HideEntities = new Dictionary<uint, YmapEntityDef>();//dictionary of entities to hide, for cutscenes to use 
 
         public bool ShowScriptedYmaps = true;
+        public bool ShowNorthYankton = false;
         public List<YmapFile> VisibleYmaps = new List<YmapFile>();
         public List<YmapEntityDef> VisibleMlos = new List<YmapEntityDef>();
 
@@ -1873,6 +1874,7 @@ namespace CodeWalker.Rendering
             LodManager.MapViewEnabled = MapViewEnabled;
             LodManager.MapViewDist = camera.OrthographicSize / MapViewDetail;
             LodManager.ShowScriptedYmaps = ShowScriptedYmaps;
+            LodManager.ShowNorthYanktonYmaps = ShowNorthYankton;
             LodManager.LODLightsEnabled = renderlodlights;
             LodManager.HDLightsEnabled = renderlights;
             LodManager.Update(renderworldVisibleYmapDict, camera, currentElapsedTime);
@@ -2246,13 +2248,20 @@ namespace CodeWalker.Rendering
                 }
             }
         }
-
         private bool RenderWorldYmapIsVisible(YmapFile ymap)
         {
             if (!ShowScriptedYmaps)
             {
                 if ((ymap._CMapData.flags & 1) > 0)
                     return false;
+            }
+
+            if (!ShowNorthYankton)
+            {
+                if (ymap.IsNorthYankton)
+                {
+                    return false;
+                }
             }
 
             if (!ymap.HasChanged)//don't cull edited project ymaps, because extents may not have been updated!
@@ -4020,6 +4029,7 @@ namespace CodeWalker.Rendering
         public bool MapViewEnabled = false;
         public float MapViewDist = 1.0f;
         public bool ShowScriptedYmaps = true;
+        public bool ShowNorthYanktonYmaps = true;
         public bool HDLightsEnabled = true;
         public bool LODLightsEnabled = true;
 
@@ -4060,7 +4070,7 @@ namespace CodeWalker.Rendering
             foreach (var kvp in CurrentYmaps)
             {
                 YmapFile ymap = null;
-                if (!ymaps.TryGetValue(kvp.Key, out ymap) || (ymap != kvp.Value) || (ymap.IsScripted && !ShowScriptedYmaps) || (ymap.LodManagerUpdate))
+                if (!ymaps.TryGetValue(kvp.Key, out ymap) || (ymap != kvp.Value) || (ymap.IsScripted && !ShowScriptedYmaps) || (ymap.IsNorthYankton && !ShowNorthYanktonYmaps) || (ymap.LodManagerUpdate))
                 {
                     RemoveYmaps.Add(kvp.Key);
                 }
@@ -4100,6 +4110,8 @@ namespace CodeWalker.Rendering
             {
                 var ymap = kvp.Value;
                 if (ymap.IsScripted && !ShowScriptedYmaps)
+                { continue; }
+                if (ymap.IsNorthYankton && !ShowNorthYanktonYmaps)
                 { continue; }
                 if ((ymap._CMapData.parent != 0) && (ymap.Parent == null)) //skip adding ymaps until parents are available
                 { continue; }

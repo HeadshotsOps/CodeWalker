@@ -12,6 +12,7 @@ using CodeWalker.World;
 
 namespace CodeWalker.GameFiles
 {
+
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public class YmapFile : GameFile, PackedFile
     {
@@ -43,6 +44,7 @@ namespace CodeWalker.GameFiles
         public bool MergedWithParent = false;
 
         public bool IsScripted { get { return (_CMapData.flags & 1) > 0; } }
+        public bool IsNorthYankton { get { return (yanktonYmaps.Contains(Name)); } }
 
         public YmapGrassInstanceBatch[] GrassInstanceBatches { get; set; }
         public YmapPropInstanceBatch[] PropInstanceBatches { get; set; }
@@ -64,7 +66,69 @@ namespace CodeWalker.GameFiles
         public List<string> SaveWarnings = null;
         public bool LodManagerUpdate = false; //forces the LOD manager to refresh this ymap when rendering
         public YmapEntityDef[] LodManagerOldEntities = null; //when entities are removed, need the old ones to remove from lod manager
-
+        static readonly HashSet<string> yanktonYmaps = new HashSet<string>
+        {
+            "prologue01.ymap",
+            "prologue01c.ymap",
+            "prologue01c_lod.ymap",
+            "prologue01d.ymap",
+            "prologue01d_lod.ymap",
+            "prologue01e.ymap",
+            "prologue01e_lod.ymap",
+            "prologue01f.ymap",
+            "prologue01f_lod.ymap",
+            "prologue01g.ymap",
+            "prologue01h.ymap",
+            "prologue01h_lod.ymap",
+            "prologue01i.ymap",
+            "prologue01i_lod.ymap",
+            "prologue01j.ymap",
+            "prologue01j_lod.ymap",
+            "prologue01k.ymap",
+            "prologue01k_lod.ymap",
+            "prologue01z.ymap",
+            "prologue01z_lod.ymap",
+            "prologue01_lod.ymap",
+            "prologue02.ymap",
+            "prologue02_lod.ymap",
+            "prologue03.ymap",
+            "prologue03b.ymap",
+            "prologue03b_lod.ymap",
+            "prologue03_grv_cov.ymap",
+            "prologue03_grv_cov_lod.ymap",
+            "prologue03_grv_dug.ymap",
+            "prologue03_grv_dug_lod.ymap",
+            "prologue03_grv_fun.ymap",
+            "prologue03_lod.ymap",
+            "prologue04.ymap",
+            "prologue04b.ymap",
+            "prologue04b_lod.ymap",
+            "prologue04_cover.ymap",
+            "prologue04_lod.ymap",
+            "prologue05.ymap",
+            "prologue05b.ymap",
+            "prologue05b_lod.ymap",
+            "prologue05_lod.ymap",
+            "prologue06.ymap",
+            "prologue06b.ymap",
+            "prologue06b_lod.ymap",
+            "prologue06_int.ymap",
+            "prologue06_int_lod.ymap",
+            "prologue06_lod.ymap",
+            "prologue06_pannel.ymap",
+            "prologue06_pannel_lod.ymap",
+            "prologue_occl.ymap",
+            "prologuerd.ymap",
+            "prologuerdb.ymap",
+            "prologuerd_lod.ymap",
+            "prologue_distantlights.ymap",
+            "prologue_grv_torch.ymap",
+            "prologue_lodlights.ymap",
+            "prologue_m2_door.ymap",
+            "prologue_m2_door_lod.ymap",
+            "prologue_occl.ymap",
+            "des_protree_start.ymap"
+        };
 
         public YmapFile() : base(null, GameFileType.Ymap)
         {

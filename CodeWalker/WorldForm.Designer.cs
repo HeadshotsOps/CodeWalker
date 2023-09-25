@@ -46,6 +46,7 @@ namespace CodeWalker
             this.ViewTabPage = new System.Windows.Forms.TabPage();
             this.ViewTabControl = new System.Windows.Forms.TabControl();
             this.ViewWorldTabPage = new System.Windows.Forms.TabPage();
+            this.WorldNorthYanktonYmapsCheckBox = new System.Windows.Forms.CheckBox();
             this.EnableModsCheckBox = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
             this.DlcLevelComboBox = new System.Windows.Forms.ComboBox();
@@ -92,6 +93,8 @@ namespace CodeWalker
             this.SelectionNameTextBox = new System.Windows.Forms.TextBox();
             this.SelectionTabControl = new System.Windows.Forms.TabControl();
             this.SelectionEntityTabPage = new System.Windows.Forms.TabPage();
+            this.btnOpenInBlender = new System.Windows.Forms.Button();
+            this.btnExportXml = new System.Windows.Forms.Button();
             this.SelEntityPropertyGrid = new CodeWalker.WinForms.ReadOnlyPropertyGrid();
             this.SelectionArchetypeTabPage = new System.Windows.Forms.TabPage();
             this.SelArchetypePropertyGrid = new CodeWalker.WinForms.ReadOnlyPropertyGrid();
@@ -311,7 +314,7 @@ namespace CodeWalker
             this.ToolbarPanel = new System.Windows.Forms.Panel();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.SubtitleTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnExportXml = new System.Windows.Forms.Button();
+            this.btnExportYmap = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.ToolsPanel.SuspendLayout();
             this.ToolsTabControl.SuspendLayout();
@@ -560,6 +563,7 @@ namespace CodeWalker
             // 
             // ViewWorldTabPage
             // 
+            this.ViewWorldTabPage.Controls.Add(this.WorldNorthYanktonYmapsCheckBox);
             this.ViewWorldTabPage.Controls.Add(this.EnableModsCheckBox);
             this.ViewWorldTabPage.Controls.Add(this.label30);
             this.ViewWorldTabPage.Controls.Add(this.DlcLevelComboBox);
@@ -583,6 +587,20 @@ namespace CodeWalker
             this.ViewWorldTabPage.TabIndex = 0;
             this.ViewWorldTabPage.Text = "World";
             this.ViewWorldTabPage.UseVisualStyleBackColor = true;
+            // 
+            // WorldNorthYanktonYmapsCheckBox
+            // 
+            this.WorldNorthYanktonYmapsCheckBox.AutoSize = true;
+            this.WorldNorthYanktonYmapsCheckBox.Checked = true;
+            this.WorldNorthYanktonYmapsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.WorldNorthYanktonYmapsCheckBox.Location = new System.Drawing.Point(9, 246);
+            this.WorldNorthYanktonYmapsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.WorldNorthYanktonYmapsCheckBox.Name = "WorldNorthYanktonYmapsCheckBox";
+            this.WorldNorthYanktonYmapsCheckBox.Size = new System.Drawing.Size(182, 24);
+            this.WorldNorthYanktonYmapsCheckBox.TabIndex = 71;
+            this.WorldNorthYanktonYmapsCheckBox.Text = "Show North Yankton";
+            this.WorldNorthYanktonYmapsCheckBox.UseVisualStyleBackColor = true;
+            this.WorldNorthYanktonYmapsCheckBox.CheckedChanged += new System.EventHandler(this.WorldNorthYanktonYmapsCheckBox_CheckedChanged);
             // 
             // EnableModsCheckBox
             // 
@@ -1188,6 +1206,8 @@ namespace CodeWalker
             // 
             // SelectionEntityTabPage
             // 
+            this.SelectionEntityTabPage.Controls.Add(this.btnExportYmap);
+            this.SelectionEntityTabPage.Controls.Add(this.btnOpenInBlender);
             this.SelectionEntityTabPage.Controls.Add(this.btnExportXml);
             this.SelectionEntityTabPage.Controls.Add(this.SelEntityPropertyGrid);
             this.SelectionEntityTabPage.Location = new System.Drawing.Point(4, 29);
@@ -1198,6 +1218,26 @@ namespace CodeWalker
             this.SelectionEntityTabPage.TabIndex = 0;
             this.SelectionEntityTabPage.Text = "Entity";
             this.SelectionEntityTabPage.UseVisualStyleBackColor = true;
+            // 
+            // btnOpenInBlender
+            // 
+            this.btnOpenInBlender.Location = new System.Drawing.Point(146, 644);
+            this.btnOpenInBlender.Name = "btnOpenInBlender";
+            this.btnOpenInBlender.Size = new System.Drawing.Size(132, 47);
+            this.btnOpenInBlender.TabIndex = 37;
+            this.btnOpenInBlender.Text = "Open in Blender";
+            this.btnOpenInBlender.UseVisualStyleBackColor = true;
+            this.btnOpenInBlender.Click += new System.EventHandler(this.btnOpenInBlender_Click);
+            // 
+            // btnExportXml
+            // 
+            this.btnExportXml.Location = new System.Drawing.Point(24, 644);
+            this.btnExportXml.Name = "btnExportXml";
+            this.btnExportXml.Size = new System.Drawing.Size(116, 47);
+            this.btnExportXml.TabIndex = 36;
+            this.btnExportXml.Text = "Export XML";
+            this.btnExportXml.UseVisualStyleBackColor = true;
+            this.btnExportXml.Click += new System.EventHandler(this.btnExportXml_Click);
             // 
             // SelEntityPropertyGrid
             // 
@@ -3784,15 +3824,15 @@ namespace CodeWalker
             // 
             this.SubtitleTimer.Tick += new System.EventHandler(this.SubtitleTimer_Tick);
             // 
-            // btnExportXml
+            // btnExportYmap
             // 
-            this.btnExportXml.Location = new System.Drawing.Point(24, 644);
-            this.btnExportXml.Name = "btnExportXml";
-            this.btnExportXml.Size = new System.Drawing.Size(116, 47);
-            this.btnExportXml.TabIndex = 36;
-            this.btnExportXml.Text = "Export XML";
-            this.btnExportXml.UseVisualStyleBackColor = true;
-            this.btnExportXml.Click += new System.EventHandler(this.btnExportXml_Click);
+            this.btnExportYmap.Location = new System.Drawing.Point(24, 697);
+            this.btnExportYmap.Name = "btnExportYmap";
+            this.btnExportYmap.Size = new System.Drawing.Size(254, 47);
+            this.btnExportYmap.TabIndex = 38;
+            this.btnExportYmap.Text = "Open Ymap in Blender";
+            this.btnExportYmap.UseVisualStyleBackColor = true;
+            this.btnExportYmap.Click += new System.EventHandler(this.btnExportYmap_Click);
             // 
             // WorldForm
             // 
@@ -4166,5 +4206,8 @@ namespace CodeWalker
         private System.Windows.Forms.ToolStripMenuItem ToolbarSelectWaveQuadButton;
         private System.Windows.Forms.ToolStripMenuItem ToolsMenuAudioExplorer;
         private System.Windows.Forms.Button btnExportXml;
+        private System.Windows.Forms.Button btnOpenInBlender;
+        private System.Windows.Forms.CheckBox WorldNorthYanktonYmapsCheckBox;
+        private System.Windows.Forms.Button btnExportYmap;
     }
 }

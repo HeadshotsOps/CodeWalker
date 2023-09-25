@@ -223,6 +223,7 @@ namespace CodeWalker
                         Thread.Sleep(20);
                     }
                 }
+
             });
         }
 
@@ -4203,6 +4204,11 @@ namespace CodeWalker
             if (CurrentFolder == null) return;
             Settings.Default.RPFExplorerStartFolder = CurrentFolder.Path;
             OptionsStartInFolderValueMenu.Text = string.IsNullOrEmpty(CurrentFolder.Path) ? "(Default)" : CurrentFolder.Path;
+        }
+
+        private void LocationTextBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

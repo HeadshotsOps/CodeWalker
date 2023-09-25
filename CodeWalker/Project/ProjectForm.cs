@@ -1,9 +1,12 @@
 ﻿using CodeWalker.GameFiles;
 using CodeWalker.Project.Panels;
 using CodeWalker.Properties;
+using CodeWalker.CustomExtensions;
 using CodeWalker.Utils;
 using CodeWalker.World;
+using Newtonsoft.Json;
 using SharpDX;
+using SharpDX.Direct3D11;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +14,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -114,6 +118,7 @@ namespace CodeWalker.Project
 
         private bool ShowProjectItemInProcess = false;
 
+        private SdkFileReloader sdkFileReloader;
 
         public ProjectForm(WorldForm worldForm = null)
         {
@@ -140,6 +145,15 @@ namespace CodeWalker.Project
                     RpfMan = GameFileCache.RpfMan;
                 })).Start();
             }
+            sdkFileReloader = new SdkFileReloader();
+            sdkFileReloader.OnSdkRefresh += ProjectForm_OnSdkRefresh;
+            sdkFileReloader.StartSdkListener();
+            OnLoadProjectTree += ProjectForm_OnLoadProjectTree;
+        }
+
+        private void ProjectForm_OnLoadProjectTree(object sender, EventArgs e)
+        {
+            LoadProjectTree();
         }
 
         private void UpdateStatus(string text)
@@ -368,6 +382,14 @@ namespace CodeWalker.Project
         {
             ShowPanel(promote,
                 () => { return new GenerateLODLightsPanel(this); }, //createFunc
+                (panel) => { panel.SetProject(CurrentProjectFile); }, //updateFunc
+                (panel) => { return true; }); //findFunc
+        }
+
+        public void ShowDeltasPanel(bool promote)
+        {
+            ShowPanel(promote,
+                () => { return new GenerateDeltasPanel(this); }, //createFunc
                 (panel) => { panel.SetProject(CurrentProjectFile); }, //updateFunc
                 (panel) => { return true; }); //findFunc
         }
@@ -1531,6 +1553,82 @@ namespace CodeWalker.Project
             SetProjectHasChanged(false);
         }
 
+        public void SaveAllProjectFiles()
+        {
+            if (CurrentProjectFile == null) return;
+
+            foreach (var ymap in CurrentProjectFile.YmapFiles)
+            {
+                if ((ymap != null) && (ymap.HasChanged))
+                {
+                    SaveYmap();
+                }
+            }
+
+            foreach (var ytyp in CurrentProjectFile.YtypFiles)
+            {
+                if ((ytyp != null) && (ytyp.HasChanged))
+                {
+                    CurrentYtypFile = ytyp;
+                    SaveYtyp();
+                }
+            }
+
+            foreach (var ybn in CurrentProjectFile.YbnFiles)
+            {
+                if ((ybn != null) && (ybn.HasChanged))
+                {
+                    CurrentYbnFile = ybn;
+                    SaveYbn();
+                }
+            }
+
+            foreach (var ynd in CurrentProjectFile.YndFiles)
+            {
+                if ((ynd != null) && (ynd.HasChanged))
+                {
+                    CurrentYndFile = ynd;
+                    SaveYnd();
+                }
+            }
+
+            foreach (var ynv in CurrentProjectFile.YnvFiles)
+            {
+                if ((ynv != null) && (ynv.HasChanged))
+                {
+                    CurrentYnvFile = ynv;
+                    SaveYnv();
+                }
+            }
+
+            foreach (var trains in CurrentProjectFile.TrainsFiles)
+            {
+                if ((trains != null) && (trains.HasChanged))
+                {
+                    CurrentTrainTrack = trains;
+                    SaveTrainTrack();
+                }
+            }
+
+            foreach (var scenario in CurrentProjectFile.ScenarioFiles)
+            {
+                if ((scenario != null) && (scenario.HasChanged))
+                {
+                    CurrentScenario = scenario;
+                    SaveScenario();
+                }
+            }
+
+            foreach (var datrel in CurrentProjectFile.AudioRelFiles)
+            {
+                if ((datrel != null) && (datrel.HasChanged))
+                {
+                    CurrentAudioFile = datrel;
+                    SaveAudioFile();
+                }
+            }
+        }
+
         public void OpenFolder()
         {
             if (FolderBrowserDialog.ShowDialogNew() != DialogResult.OK) return;
@@ -1809,9 +1907,6 @@ namespace CodeWalker.Project
                     CurrentAudioFile = caudf;
                     //ShowEditAudioFilePanel(false);
                 }
-
-
-                SaveProject();
             }
         }
 
@@ -9282,6 +9377,7 @@ namespace CodeWalker.Project
                     return;
                 }
             }
+            sdkFileReloader.StopSdkListener();
             CloseProject();
         }
         private void ProjectForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -9788,5 +9884,230 @@ namespace CodeWalker.Project
         {
             SaveAll();
         }
+
+        private void exportYmapXml_Click(object sender, EventArgs e)
+        {
+            if (CurrentYmapFile == null)
+            {
+                return;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.FileName = CurrentYmapFile.Name + ".xml";
+
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+
+                string xml = MetaXml.GetXml(CurrentYmapFile, out _);
+                File.WriteAllText(path, xml);
+            }
+           
+        }
+
+        private void deleteLODlightRangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            
+            Vector3 bbMin = new Vector3(-187,-1091,35); //-187.7461, -1091.232, 36.30464
+            Vector3 bbMax = new Vector3(-64, -966, 350); //-64.50817, -966.9929, 57.90015
+            foreach (YmapFile map in  CurrentProjectFile.YmapFiles)
+            {
+                if (map.LODLights is null)
+                {
+                    continue;
+                }
+                foreach (var lodl in map.LODLights.LodLights)
+                {
+                    if (IsInsideBoundingBox(lodl.Position, bbMin, bbMax))
+                    {
+                        lock (WorldForm.RenderSyncRoot)
+                        {
+                            map.RemoveLodLight(lodl);
+                        }
+
+                    }
+            
+                }
+
+                
+            }
+        }
+
+        // Check if a point is inside a bounding box
+        private bool IsInsideBoundingBox(Vector3 point, Vector3 bbMin, Vector3 bbMax)
+        {
+            return point.X >= bbMin.X && point.X <= bbMax.X &&
+                   point.Y >= bbMin.Y && point.Y <= bbMax.Y &&
+                   point.Z >= bbMin.Z && point.Z <= bbMax.Z;
+        }
+
+        private void fiveMDeltasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDeltasPanel(true);
+        }
+
+        private void FileSaveItemAllMenu_Click(object sender, EventArgs e)
+        {
+            SaveAll();
+        }
+
+
+        #region Extensions
+
+
+        private GameFileType? DetermineFileType(string path)
+        {
+            if (path.EndsWith("ybn"))
+            {
+                return GameFileType.Ybn;
+            }
+            if (path.EndsWith("ydr"))
+            {
+                return GameFileType.Ydr;
+            }
+            return null;
+        }
+
+        private void ProjectForm_OnSdkRefresh(object sender, SdkRequest req)
+        {
+           
+            if (req.RequestType == "REFRESH")
+            {
+                RefreshSdkFile(req.AssetName);
+            }
+            else if (req.RequestType == "ADD")
+            {
+                AddSdkDrawable(req.FilePath);
+            }
+
+        }
+
+        private void EnsureDrawableArchetype(YdrFile ydrFile, string fallbackYtypName)
+        {
+            foreach (YtypFile ytyp in CurrentProjectFile.YtypFiles)
+            {
+                foreach (Archetype arch in ytyp.AllArchetypes)
+                {
+                    if (arch.AssetName == ydrFile.Name.Replace(".ydr", ""))
+                    {
+                        return;
+                    }
+                }
+            }
+            //No ytyp contains our asset, so let's create it
+            YtypFile ytypToAddTo = CurrentProjectFile.YtypFiles.FirstOrDefault(typ => typ.Name == fallbackYtypName);
+            if (ytypToAddTo == null)
+            {
+                MessageBox.Show($"Attempting to add {ydrFile.Name} to {fallbackYtypName} failed because the ytyp could not be found in the project.");
+                return;
+            }
+            CreateArchetypeFromYdr(ydrFile, ytypToAddTo);
+            
+
+        }
+
+        private event EventHandler OnLoadProjectTree;
+        private void CreateArchetypeFromYdr(YdrFile ydrFile, YtypFile ytypFile)
+        {
+            if (ytypFile == null) return;
+
+            Archetype archetype = null;
+
+            archetype = ytypFile.AddArchetype();
+            YdrFile ydr = ydrFile;
+            RpfFile.LoadResourceFile(ydr, File.ReadAllBytes(ydrFile.FilePath), 165);
+            var name = Path.GetFileNameWithoutExtension(ydrFile.FilePath);
+            var hash = JenkHash.GenHash(name);
+            archetype._BaseArchetypeDef.name = hash;
+            archetype._BaseArchetypeDef.assetName = hash;
+            archetype._BaseArchetypeDef.assetType = rage__fwArchetypeDef__eAssetType.ASSET_TYPE_DRAWABLE;
+            archetype._BaseArchetypeDef.specialAttribute = 0;
+            archetype._BaseArchetypeDef.flags = 32;
+            archetype._BaseArchetypeDef.bbMin = ydr.Drawable.BoundingBoxMin;
+            archetype._BaseArchetypeDef.bbMax = ydr.Drawable.BoundingBoxMax;
+            archetype._BaseArchetypeDef.bsCentre = ydr.Drawable.BoundingCenter;
+            archetype._BaseArchetypeDef.bsRadius = ydr.Drawable.BoundingSphereRadius;
+            archetype._BaseArchetypeDef.hdTextureDist = 60.0f;
+            archetype._BaseArchetypeDef.lodDist = 60.0f;
+            if (ydr.Drawable.ShaderGroup.TextureDictionary != null) archetype._BaseArchetypeDef.textureDictionary = hash;
+            if (ydr.Drawable.Bound != null) archetype._BaseArchetypeDef.physicsDictionary = hash;
+
+            archetype.Init(ytypFile, ref archetype._BaseArchetypeDef);
+
+            AddProjectArchetype(archetype);
+
+            Invoke(new MethodInvoker(LoadProjectTree));
+           //OnLoadProjectTree.Invoke(this, EventArgs.Empty);
+            
+            //ProjectExplorer?.TrySelectArchetypeTreeNode(archetype);
+            CurrentArchetype = archetype;
+
+        }
+        private void AddSdkDrawable(string filePath)
+        {
+            if (CurrentProjectFile == null)
+            {
+                return;
+            }
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show($"Asset with path {filePath} requested for addition, could not be found");
+                return;
+            }
+            YdrFile newYdr = CurrentProjectFile.AddYdrFile(filePath);
+            LoadYdrFromFile(newYdr, filePath);
+            EnsureDrawableArchetype(newYdr, "rm_plaza.ytyp");
+        }
+
+        private void RefreshSdkFile(string assetName)
+        {
+            GameFileType? assetType = DetermineFileType(assetName);
+
+            if (assetType == null)
+            {
+                MessageBox.Show($"Asset {assetName} queued for reloading, is not supported for hot reload");
+                return;
+            }
+            if (assetType == GameFileType.Ydr)
+            {
+                YdrFile ydr = CurrentProjectFile.YdrFiles.FirstOrDefault(ydr_ => ydr_.Name.Equals(assetName));
+                if (ydr == null)
+                {
+                    MessageBox.Show($"Asset {assetName} queued for reloading, could not be found");
+                    return;
+                }
+                string filepath = ydr.FilePath;
+                GameFileCache?.RemoveProjectFile(ydr);
+                CurrentProjectFile.RemoveYdrFile(ydr);
+                CurrentYdrFile = null;
+                var reloadedydr = CurrentProjectFile.AddYdrFile(filepath);
+                LoadYdrFromFile(ydr, filepath);
+            }
+            else if (assetType == GameFileType.Ybn)
+            {
+                YbnFile ybn = CurrentProjectFile.YbnFiles.FirstOrDefault(ybn_ => ybn_.Name.Equals(assetName));
+                if (ybn == null)
+                {
+                    MessageBox.Show($"Asset {assetName} queued for reloading, could not be found");
+                    return;
+                }
+                string filePath = ybn.FilePath;
+                //GameFileCache?.RemoveProjectFile(ybn);
+                //CurrentProjectFile.RemoveYbnFile(ybn);
+                //CurrentYbnFile = null;
+                YbnFile reloadedYbn = CurrentProjectFile.AddYbnFile(filePath);
+                LoadYbnFromFile(ybn, filePath);
+            }
+        }
+
+        private void LoadYmapInBlender()
+        {
+            YmapFile ymap = CurrentYmapFile;
+
+        }
+
+        #endregion
     }
 }

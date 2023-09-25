@@ -64,11 +64,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.MloArchetypeTabPage = new System.Windows.Forms.TabPage();
+            this.MloUpdatePortalCountsButton = new System.Windows.Forms.Button();
             this.TimeArchetypeTabPage = new System.Windows.Forms.TabPage();
             this.TimeFlagsTextBox = new System.Windows.Forms.TextBox();
             this.TimeFlagsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.MloUpdatePortalCountsButton = new System.Windows.Forms.Button();
+            this.btn_CalcBB = new System.Windows.Forms.Button();
             this.BaseArchetypeTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SpecialAttributeNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HDTextureDistNumericUpDown)).BeginInit();
@@ -80,6 +81,7 @@
             // 
             // BaseArchetypeTabPage
             // 
+            this.BaseArchetypeTabPage.Controls.Add(this.btn_CalcBB);
             this.BaseArchetypeTabPage.Controls.Add(this.ArchetypeDeleteButton);
             this.BaseArchetypeTabPage.Controls.Add(this.label13);
             this.BaseArchetypeTabPage.Controls.Add(this.BSRadiusTextBox);
@@ -112,10 +114,11 @@
             this.BaseArchetypeTabPage.Controls.Add(this.LodDistNumericUpDown);
             this.BaseArchetypeTabPage.Controls.Add(this.label2);
             this.BaseArchetypeTabPage.Controls.Add(this.label1);
-            this.BaseArchetypeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BaseArchetypeTabPage.Location = new System.Drawing.Point(4, 29);
+            this.BaseArchetypeTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BaseArchetypeTabPage.Name = "BaseArchetypeTabPage";
-            this.BaseArchetypeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BaseArchetypeTabPage.Size = new System.Drawing.Size(631, 479);
+            this.BaseArchetypeTabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BaseArchetypeTabPage.Size = new System.Drawing.Size(950, 744);
             this.BaseArchetypeTabPage.TabIndex = 0;
             this.BaseArchetypeTabPage.Text = "Base Archetype Def";
             this.BaseArchetypeTabPage.UseVisualStyleBackColor = true;
@@ -123,9 +126,10 @@
             // ArchetypeDeleteButton
             // 
             this.ArchetypeDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ArchetypeDeleteButton.Location = new System.Drawing.Point(110, 439);
+            this.ArchetypeDeleteButton.Location = new System.Drawing.Point(165, 675);
+            this.ArchetypeDeleteButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ArchetypeDeleteButton.Name = "ArchetypeDeleteButton";
-            this.ArchetypeDeleteButton.Size = new System.Drawing.Size(126, 23);
+            this.ArchetypeDeleteButton.Size = new System.Drawing.Size(189, 35);
             this.ArchetypeDeleteButton.TabIndex = 79;
             this.ArchetypeDeleteButton.Text = "Delete Archetype";
             this.ArchetypeDeleteButton.UseVisualStyleBackColor = true;
@@ -135,9 +139,10 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 405);
+            this.label13.Location = new System.Drawing.Point(12, 623);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.Size = new System.Drawing.Size(85, 20);
             this.label13.TabIndex = 78;
             this.label13.Text = "BSRadius:";
             // 
@@ -145,9 +150,10 @@
             // 
             this.BSRadiusTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BSRadiusTextBox.Location = new System.Drawing.Point(71, 402);
+            this.BSRadiusTextBox.Location = new System.Drawing.Point(106, 618);
+            this.BSRadiusTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BSRadiusTextBox.Name = "BSRadiusTextBox";
-            this.BSRadiusTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BSRadiusTextBox.Size = new System.Drawing.Size(826, 26);
             this.BSRadiusTextBox.TabIndex = 77;
             this.BSRadiusTextBox.TextChanged += new System.EventHandler(this.BSRadiusTextBox_TextChanged);
             // 
@@ -155,9 +161,10 @@
             // 
             this.BSCenterTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BSCenterTextBox.Location = new System.Drawing.Point(71, 376);
+            this.BSCenterTextBox.Location = new System.Drawing.Point(106, 578);
+            this.BSCenterTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BSCenterTextBox.Name = "BSCenterTextBox";
-            this.BSCenterTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BSCenterTextBox.Size = new System.Drawing.Size(826, 26);
             this.BSCenterTextBox.TabIndex = 75;
             this.BSCenterTextBox.TextChanged += new System.EventHandler(this.BSCenterTextBox_TextChanged);
             // 
@@ -165,9 +172,10 @@
             // 
             this.BBMaxTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BBMaxTextBox.Location = new System.Drawing.Point(71, 350);
+            this.BBMaxTextBox.Location = new System.Drawing.Point(106, 538);
+            this.BBMaxTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BBMaxTextBox.Name = "BBMaxTextBox";
-            this.BBMaxTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BBMaxTextBox.Size = new System.Drawing.Size(826, 26);
             this.BBMaxTextBox.TabIndex = 73;
             this.BBMaxTextBox.TextChanged += new System.EventHandler(this.BBMaxTextBox_TextChanged);
             // 
@@ -175,9 +183,10 @@
             // 
             this.BBMinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BBMinTextBox.Location = new System.Drawing.Point(71, 324);
+            this.BBMinTextBox.Location = new System.Drawing.Point(106, 498);
+            this.BBMinTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BBMinTextBox.Name = "BBMinTextBox";
-            this.BBMinTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BBMinTextBox.Size = new System.Drawing.Size(826, 26);
             this.BBMinTextBox.TabIndex = 71;
             this.BBMinTextBox.TextChanged += new System.EventHandler(this.BBMinTextBox_TextChanged);
             // 
@@ -185,18 +194,20 @@
             // 
             this.ArchetypeNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArchetypeNameTextBox.Location = new System.Drawing.Point(110, 9);
+            this.ArchetypeNameTextBox.Location = new System.Drawing.Point(165, 14);
+            this.ArchetypeNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ArchetypeNameTextBox.Name = "ArchetypeNameTextBox";
-            this.ArchetypeNameTextBox.Size = new System.Drawing.Size(247, 20);
+            this.ArchetypeNameTextBox.Size = new System.Drawing.Size(368, 26);
             this.ArchetypeNameTextBox.TabIndex = 70;
             this.ArchetypeNameTextBox.TextChanged += new System.EventHandler(this.ArchetypeNameTextBox_TextChanged);
             // 
             // ArchetypeFlagsTextBox
             // 
             this.ArchetypeFlagsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArchetypeFlagsTextBox.Location = new System.Drawing.Point(476, 12);
+            this.ArchetypeFlagsTextBox.Location = new System.Drawing.Point(714, 18);
+            this.ArchetypeFlagsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ArchetypeFlagsTextBox.Name = "ArchetypeFlagsTextBox";
-            this.ArchetypeFlagsTextBox.Size = new System.Drawing.Size(147, 20);
+            this.ArchetypeFlagsTextBox.Size = new System.Drawing.Size(218, 26);
             this.ArchetypeFlagsTextBox.TabIndex = 66;
             this.ArchetypeFlagsTextBox.TextChanged += new System.EventHandler(this.ArchetypeFlagsTextBox_TextChanged);
             // 
@@ -204,9 +215,10 @@
             // 
             this.PhysicsDictionaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PhysicsDictionaryTextBox.Location = new System.Drawing.Point(110, 191);
+            this.PhysicsDictionaryTextBox.Location = new System.Drawing.Point(165, 294);
+            this.PhysicsDictionaryTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PhysicsDictionaryTextBox.Name = "PhysicsDictionaryTextBox";
-            this.PhysicsDictionaryTextBox.Size = new System.Drawing.Size(206, 20);
+            this.PhysicsDictionaryTextBox.Size = new System.Drawing.Size(307, 26);
             this.PhysicsDictionaryTextBox.TabIndex = 60;
             this.PhysicsDictionaryTextBox.TextChanged += new System.EventHandler(this.PhysicsDictionaryTextBox_TextChanged);
             // 
@@ -214,9 +226,10 @@
             // 
             this.ClipDictionaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClipDictionaryTextBox.Location = new System.Drawing.Point(110, 165);
+            this.ClipDictionaryTextBox.Location = new System.Drawing.Point(165, 254);
+            this.ClipDictionaryTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ClipDictionaryTextBox.Name = "ClipDictionaryTextBox";
-            this.ClipDictionaryTextBox.Size = new System.Drawing.Size(247, 20);
+            this.ClipDictionaryTextBox.Size = new System.Drawing.Size(368, 26);
             this.ClipDictionaryTextBox.TabIndex = 58;
             this.ClipDictionaryTextBox.TextChanged += new System.EventHandler(this.ClipDictionaryTextBox_TextChanged);
             // 
@@ -224,9 +237,10 @@
             // 
             this.AssetNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AssetNameTextBox.Location = new System.Drawing.Point(110, 35);
+            this.AssetNameTextBox.Location = new System.Drawing.Point(165, 54);
+            this.AssetNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.AssetNameTextBox.Name = "AssetNameTextBox";
-            this.AssetNameTextBox.Size = new System.Drawing.Size(247, 20);
+            this.AssetNameTextBox.Size = new System.Drawing.Size(368, 26);
             this.AssetNameTextBox.TabIndex = 56;
             this.AssetNameTextBox.TextChanged += new System.EventHandler(this.AssetNameTextBox_TextChanged);
             // 
@@ -234,9 +248,10 @@
             // 
             this.TextureDictTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextureDictTextBox.Location = new System.Drawing.Point(110, 139);
+            this.TextureDictTextBox.Location = new System.Drawing.Point(165, 214);
+            this.TextureDictTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TextureDictTextBox.Name = "TextureDictTextBox";
-            this.TextureDictTextBox.Size = new System.Drawing.Size(206, 20);
+            this.TextureDictTextBox.Size = new System.Drawing.Size(307, 26);
             this.TextureDictTextBox.TabIndex = 54;
             this.TextureDictTextBox.TextChanged += new System.EventHandler(this.TextureDictTextBox_TextChanged);
             // 
@@ -244,9 +259,10 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 379);
+            this.label12.Location = new System.Drawing.Point(12, 583);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.Size = new System.Drawing.Size(83, 20);
             this.label12.TabIndex = 76;
             this.label12.Text = "BSCenter:";
             // 
@@ -254,9 +270,10 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 353);
+            this.label11.Location = new System.Drawing.Point(28, 543);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.Size = new System.Drawing.Size(64, 20);
             this.label11.TabIndex = 74;
             this.label11.Text = "BBMax:";
             // 
@@ -264,9 +281,10 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 327);
+            this.label5.Location = new System.Drawing.Point(36, 503);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(60, 20);
             this.label5.TabIndex = 72;
             this.label5.Text = "BBMin:";
             // 
@@ -274,9 +292,10 @@
             // 
             this.PhysicsDictHashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PhysicsDictHashLabel.AutoSize = true;
-            this.PhysicsDictHashLabel.Location = new System.Drawing.Point(322, 194);
+            this.PhysicsDictHashLabel.Location = new System.Drawing.Point(483, 298);
+            this.PhysicsDictHashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PhysicsDictHashLabel.Name = "PhysicsDictHashLabel";
-            this.PhysicsDictHashLabel.Size = new System.Drawing.Size(35, 13);
+            this.PhysicsDictHashLabel.Size = new System.Drawing.Size(51, 20);
             this.PhysicsDictHashLabel.TabIndex = 69;
             this.PhysicsDictHashLabel.Text = "Hash:";
             // 
@@ -284,9 +303,10 @@
             // 
             this.TextureDictHashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TextureDictHashLabel.AutoSize = true;
-            this.TextureDictHashLabel.Location = new System.Drawing.Point(322, 142);
+            this.TextureDictHashLabel.Location = new System.Drawing.Point(483, 218);
+            this.TextureDictHashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TextureDictHashLabel.Name = "TextureDictHashLabel";
-            this.TextureDictHashLabel.Size = new System.Drawing.Size(35, 13);
+            this.TextureDictHashLabel.Size = new System.Drawing.Size(51, 20);
             this.TextureDictHashLabel.TabIndex = 68;
             this.TextureDictHashLabel.Text = "Hash:";
             // 
@@ -329,9 +349,10 @@
             "536870912 - Disable green vertex channel",
             "1073741824 - Disable blue vertex channel",
             "2147483648 - Disable alpha vertex channel"});
-            this.EntityFlagsCheckedListBox.Location = new System.Drawing.Point(441, 38);
+            this.EntityFlagsCheckedListBox.Location = new System.Drawing.Point(662, 58);
+            this.EntityFlagsCheckedListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EntityFlagsCheckedListBox.Name = "EntityFlagsCheckedListBox";
-            this.EntityFlagsCheckedListBox.Size = new System.Drawing.Size(182, 274);
+            this.EntityFlagsCheckedListBox.Size = new System.Drawing.Size(271, 418);
             this.EntityFlagsCheckedListBox.TabIndex = 67;
             this.EntityFlagsCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ArchetypeFlagsCheckedListBox_ItemCheck);
             // 
@@ -339,9 +360,10 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(419, 15);
+            this.label14.Location = new System.Drawing.Point(628, 23);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(35, 13);
+            this.label14.Size = new System.Drawing.Size(52, 20);
             this.label14.TabIndex = 65;
             this.label14.Text = "Flags:";
             // 
@@ -349,32 +371,35 @@
             // 
             this.SpecialAttributeNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SpecialAttributeNumericUpDown.Location = new System.Drawing.Point(110, 113);
+            this.SpecialAttributeNumericUpDown.Location = new System.Drawing.Point(165, 174);
+            this.SpecialAttributeNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SpecialAttributeNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.SpecialAttributeNumericUpDown.Name = "SpecialAttributeNumericUpDown";
-            this.SpecialAttributeNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.SpecialAttributeNumericUpDown.Size = new System.Drawing.Size(370, 26);
             this.SpecialAttributeNumericUpDown.TabIndex = 64;
             this.SpecialAttributeNumericUpDown.ValueChanged += new System.EventHandler(this.SpecialAttributeNumericUpDown_ValueChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(17, 115);
+            this.label10.Location = new System.Drawing.Point(26, 177);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.Size = new System.Drawing.Size(130, 20);
             this.label10.TabIndex = 63;
             this.label10.Text = "Special Attribute:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(41, 220);
+            this.label9.Location = new System.Drawing.Point(62, 338);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.Size = new System.Drawing.Size(92, 20);
             this.label9.TabIndex = 62;
             this.label9.Text = "Asset Type:";
             // 
@@ -384,44 +409,49 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AssetTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AssetTypeComboBox.FormattingEnabled = true;
-            this.AssetTypeComboBox.Location = new System.Drawing.Point(110, 217);
+            this.AssetTypeComboBox.Location = new System.Drawing.Point(165, 334);
+            this.AssetTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.AssetTypeComboBox.Name = "AssetTypeComboBox";
-            this.AssetTypeComboBox.Size = new System.Drawing.Size(247, 21);
+            this.AssetTypeComboBox.Size = new System.Drawing.Size(368, 28);
             this.AssetTypeComboBox.TabIndex = 61;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 194);
+            this.label8.Location = new System.Drawing.Point(12, 298);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.Size = new System.Drawing.Size(140, 20);
             this.label8.TabIndex = 59;
             this.label8.Text = "Physics Dictionary:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(27, 168);
+            this.label7.Location = new System.Drawing.Point(40, 258);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.Size = new System.Drawing.Size(113, 20);
             this.label7.TabIndex = 57;
             this.label7.Text = "Clip Dictionary:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(37, 38);
+            this.label6.Location = new System.Drawing.Point(56, 58);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.Size = new System.Drawing.Size(100, 20);
             this.label6.TabIndex = 55;
             this.label6.Text = "Asset Name:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 142);
+            this.label4.Location = new System.Drawing.Point(12, 218);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.Size = new System.Drawing.Size(140, 20);
             this.label4.TabIndex = 53;
             this.label4.Text = "Texture Dictionary:";
             // 
@@ -430,23 +460,25 @@
             this.HDTextureDistNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HDTextureDistNumericUpDown.DecimalPlaces = 8;
-            this.HDTextureDistNumericUpDown.Location = new System.Drawing.Point(110, 87);
+            this.HDTextureDistNumericUpDown.Location = new System.Drawing.Point(165, 134);
+            this.HDTextureDistNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.HDTextureDistNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.HDTextureDistNumericUpDown.Name = "HDTextureDistNumericUpDown";
-            this.HDTextureDistNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.HDTextureDistNumericUpDown.Size = new System.Drawing.Size(370, 26);
             this.HDTextureDistNumericUpDown.TabIndex = 52;
             this.HDTextureDistNumericUpDown.ValueChanged += new System.EventHandler(this.HDTextureDistNumericUpDown_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 89);
+            this.label3.Location = new System.Drawing.Point(27, 137);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.Size = new System.Drawing.Size(126, 20);
             this.label3.TabIndex = 51;
             this.label3.Text = "HD Texture Dist:";
             // 
@@ -455,32 +487,35 @@
             this.LodDistNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LodDistNumericUpDown.DecimalPlaces = 8;
-            this.LodDistNumericUpDown.Location = new System.Drawing.Point(110, 61);
+            this.LodDistNumericUpDown.Location = new System.Drawing.Point(165, 94);
+            this.LodDistNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.LodDistNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.LodDistNumericUpDown.Name = "LodDistNumericUpDown";
-            this.LodDistNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.LodDistNumericUpDown.Size = new System.Drawing.Size(370, 26);
             this.LodDistNumericUpDown.TabIndex = 50;
             this.LodDistNumericUpDown.ValueChanged += new System.EventHandler(this.LodDistNumericUpDown_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 63);
+            this.label2.Location = new System.Drawing.Point(82, 97);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.Size = new System.Drawing.Size(72, 20);
             this.label2.TabIndex = 49;
             this.label2.Text = "Lod Dist:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 12);
+            this.label1.Location = new System.Drawing.Point(99, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 48;
             this.label1.Text = "Name:";
             // 
@@ -491,39 +526,54 @@
             this.TabControl.Controls.Add(this.TimeArchetypeTabPage);
             this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(639, 505);
+            this.TabControl.Size = new System.Drawing.Size(958, 777);
             this.TabControl.TabIndex = 48;
             // 
             // MloArchetypeTabPage
             // 
             this.MloArchetypeTabPage.Controls.Add(this.MloUpdatePortalCountsButton);
-            this.MloArchetypeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.MloArchetypeTabPage.Location = new System.Drawing.Point(4, 29);
+            this.MloArchetypeTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MloArchetypeTabPage.Name = "MloArchetypeTabPage";
-            this.MloArchetypeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.MloArchetypeTabPage.Size = new System.Drawing.Size(631, 479);
+            this.MloArchetypeTabPage.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MloArchetypeTabPage.Size = new System.Drawing.Size(950, 744);
             this.MloArchetypeTabPage.TabIndex = 1;
             this.MloArchetypeTabPage.Text = "Mlo Archetype Def";
             this.MloArchetypeTabPage.UseVisualStyleBackColor = true;
+            // 
+            // MloUpdatePortalCountsButton
+            // 
+            this.MloUpdatePortalCountsButton.Location = new System.Drawing.Point(74, 54);
+            this.MloUpdatePortalCountsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MloUpdatePortalCountsButton.Name = "MloUpdatePortalCountsButton";
+            this.MloUpdatePortalCountsButton.Size = new System.Drawing.Size(230, 35);
+            this.MloUpdatePortalCountsButton.TabIndex = 0;
+            this.MloUpdatePortalCountsButton.Text = "Update Portal Counts";
+            this.MloUpdatePortalCountsButton.UseVisualStyleBackColor = true;
+            this.MloUpdatePortalCountsButton.Click += new System.EventHandler(this.MloUpdatePortalCountsButton_Click);
             // 
             // TimeArchetypeTabPage
             // 
             this.TimeArchetypeTabPage.Controls.Add(this.TimeFlagsTextBox);
             this.TimeArchetypeTabPage.Controls.Add(this.TimeFlagsCheckedListBox);
             this.TimeArchetypeTabPage.Controls.Add(this.label15);
-            this.TimeArchetypeTabPage.Location = new System.Drawing.Point(4, 22);
+            this.TimeArchetypeTabPage.Location = new System.Drawing.Point(4, 29);
+            this.TimeArchetypeTabPage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TimeArchetypeTabPage.Name = "TimeArchetypeTabPage";
-            this.TimeArchetypeTabPage.Size = new System.Drawing.Size(631, 479);
+            this.TimeArchetypeTabPage.Size = new System.Drawing.Size(950, 744);
             this.TimeArchetypeTabPage.TabIndex = 2;
             this.TimeArchetypeTabPage.Text = "Time Archetype Def";
             this.TimeArchetypeTabPage.UseVisualStyleBackColor = true;
             // 
             // TimeFlagsTextBox
             // 
-            this.TimeFlagsTextBox.Location = new System.Drawing.Point(72, 6);
+            this.TimeFlagsTextBox.Location = new System.Drawing.Point(108, 9);
+            this.TimeFlagsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TimeFlagsTextBox.Name = "TimeFlagsTextBox";
-            this.TimeFlagsTextBox.Size = new System.Drawing.Size(147, 20);
+            this.TimeFlagsTextBox.Size = new System.Drawing.Size(218, 26);
             this.TimeFlagsTextBox.TabIndex = 69;
             this.TimeFlagsTextBox.TextChanged += new System.EventHandler(this.TimeFlagsTextBox_TextChanged);
             // 
@@ -566,39 +616,42 @@
             "536870912 - Unk30",
             "1073741824 - Unk31",
             "2147483648 - Unk32"});
-            this.TimeFlagsCheckedListBox.Location = new System.Drawing.Point(18, 32);
+            this.TimeFlagsCheckedListBox.Location = new System.Drawing.Point(27, 49);
+            this.TimeFlagsCheckedListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TimeFlagsCheckedListBox.Name = "TimeFlagsCheckedListBox";
-            this.TimeFlagsCheckedListBox.Size = new System.Drawing.Size(201, 424);
+            this.TimeFlagsCheckedListBox.Size = new System.Drawing.Size(300, 648);
             this.TimeFlagsCheckedListBox.TabIndex = 70;
             this.TimeFlagsCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TimeFlagsCheckedListBox_ItemCheck);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(5, 9);
+            this.label15.Location = new System.Drawing.Point(8, 14);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(61, 13);
+            this.label15.Size = new System.Drawing.Size(90, 20);
             this.label15.TabIndex = 68;
             this.label15.Text = "Time Flags:";
             // 
-            // MloUpdatePortalCountsButton
+            // btn_CalcBB
             // 
-            this.MloUpdatePortalCountsButton.Location = new System.Drawing.Point(49, 35);
-            this.MloUpdatePortalCountsButton.Name = "MloUpdatePortalCountsButton";
-            this.MloUpdatePortalCountsButton.Size = new System.Drawing.Size(153, 23);
-            this.MloUpdatePortalCountsButton.TabIndex = 0;
-            this.MloUpdatePortalCountsButton.Text = "Update Portal Counts";
-            this.MloUpdatePortalCountsButton.UseVisualStyleBackColor = true;
-            this.MloUpdatePortalCountsButton.Click += new System.EventHandler(this.MloUpdatePortalCountsButton_Click);
+            this.btn_CalcBB.Location = new System.Drawing.Point(382, 675);
+            this.btn_CalcBB.Name = "btn_CalcBB";
+            this.btn_CalcBB.Size = new System.Drawing.Size(199, 35);
+            this.btn_CalcBB.TabIndex = 80;
+            this.btn_CalcBB.Text = "Update Bounding Box";
+            this.btn_CalcBB.UseVisualStyleBackColor = true;
+            this.btn_CalcBB.Click += new System.EventHandler(this.btn_CalcBB_Click);
             // 
             // EditYtypArchetypePanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 505);
+            this.ClientSize = new System.Drawing.Size(958, 777);
             this.Controls.Add(this.TabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(531, 458);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(786, 674);
             this.Name = "EditYtypArchetypePanel";
             this.Text = "Edit Archetype";
             this.Load += new System.EventHandler(this.EditYtypArchetypePanel_Load);
@@ -657,5 +710,6 @@
         private System.Windows.Forms.CheckedListBox TimeFlagsCheckedListBox;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button MloUpdatePortalCountsButton;
+        private System.Windows.Forms.Button btn_CalcBB;
     }
 }

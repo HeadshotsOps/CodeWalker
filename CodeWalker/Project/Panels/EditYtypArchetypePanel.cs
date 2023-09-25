@@ -431,5 +431,46 @@ namespace CodeWalker.Project.Panels
                 }
             }
         }
+
+        private void btn_CalcBB_Click(object sender, EventArgs e)
+        {
+            string assetName = CurrentArchetype.AssetName;
+
+            YdrFile ydr = ProjectForm.GameFileCache.GetYdr(JenkHash.GenHash(assetName));
+            if (ydr is null)
+            {
+                YftFile yft = ProjectForm.GameFileCache.GetYft(JenkHash.GenHash(assetName));
+                if (yft is null)
+                {
+                    return;
+                }
+                FragDrawable fdwbl = yft.Fragment.Drawable;
+                CurrentArchetype.BBMin = fdwbl.BoundingBoxMin;
+                CurrentArchetype.BBMax = fdwbl.BoundingBoxMax;
+                CurrentArchetype.BSCenter = fdwbl.BoundingCenter;
+                CurrentArchetype.BSRadius = fdwbl.BoundingSphereRadius;
+
+                CurrentArchetype._BaseArchetypeDef.bbMin = fdwbl.BoundingBoxMin;
+                CurrentArchetype._BaseArchetypeDef.bbMax = fdwbl.BoundingBoxMax;
+                CurrentArchetype._BaseArchetypeDef.bsCentre = fdwbl.BoundingCenter;
+                CurrentArchetype._BaseArchetypeDef.bsRadius = fdwbl.BoundingSphereRadius;
+            }
+            else
+            {
+                Drawable dwbl = ydr.Drawable;
+                CurrentArchetype.BBMin = dwbl.BoundingBoxMin;
+                CurrentArchetype.BBMax = dwbl.BoundingBoxMax;
+                CurrentArchetype.BSCenter = dwbl.BoundingCenter;
+                CurrentArchetype.BSRadius = dwbl.BoundingSphereRadius;
+
+                CurrentArchetype._BaseArchetypeDef.bbMin = dwbl.BoundingBoxMin;
+                CurrentArchetype._BaseArchetypeDef.bbMax = dwbl.BoundingBoxMax;
+                CurrentArchetype._BaseArchetypeDef.bsCentre = dwbl.BoundingCenter;
+                CurrentArchetype._BaseArchetypeDef.bsRadius = dwbl.BoundingSphereRadius;
+            }
+            
+
+            ProjectForm.SetYtypHasChanged(true);
+        }
     }
 }
