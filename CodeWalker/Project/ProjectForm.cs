@@ -20,6 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Timers;
 
 namespace CodeWalker.Project
 {
@@ -1749,6 +1750,13 @@ namespace CodeWalker.Project
                             {
                                 var dat151 = CurrentProjectFile.AddAudioRelFile(file);
                                 if (dat151 != null) LoadAudioRelFromFile(dat151, file);
+                            }
+                            break;
+                        case ".xml":
+                            if (fn.StartsWith("water_"))
+                            {
+                                var dat151 = CurrentProjectFile.WaterFilePath = fn;
+                                WorldForm.SetWaterFile(fl);
                             }
                             break;
                     }
@@ -8751,6 +8759,8 @@ namespace CodeWalker.Project
                 if (ybn?.Bounds != null)
                 {
                     WorldForm.UpdateCollisionBoundsGraphics(ybn?.Bounds);
+                    WorldForm.GameFileCache.AddProjectFile(ybn);
+                    WorldForm.AddYbnToBoundsStore(ybn);
                 }
             }
         }
@@ -9967,6 +9977,10 @@ namespace CodeWalker.Project
             {
                 return GameFileType.Ydr;
             }
+            if (path.EndsWith("ymap"))
+            {
+                return GameFileType.Ymap;
+            }
             return null;
         }
 
@@ -10031,7 +10045,15 @@ namespace CodeWalker.Project
             archetype._BaseArchetypeDef.bsRadius = ydr.Drawable.BoundingSphereRadius;
             archetype._BaseArchetypeDef.hdTextureDist = 60.0f;
             archetype._BaseArchetypeDef.lodDist = 60.0f;
-            if (ydr.Drawable.ShaderGroup.TextureDictionary != null) archetype._BaseArchetypeDef.textureDictionary = hash;
+            if (ydr.Drawable.ShaderGroup.TextureDictionary != null)
+            {
+                archetype._BaseArchetypeDef.textureDictionary = hash;
+            }
+            else
+            {
+                archetype._BaseArchetypeDef.textureDictionary = JenkHash.GenHash("blockout_textures");
+            }
+            
             if (ydr.Drawable.Bound != null) archetype._BaseArchetypeDef.physicsDictionary = hash;
 
             archetype.Init(ytypFile, ref archetype._BaseArchetypeDef);
@@ -10057,6 +10079,11 @@ namespace CodeWalker.Project
                 return;
             }
             YdrFile newYdr = CurrentProjectFile.AddYdrFile(filePath);
+            if (newYdr is null)
+            {
+                MessageBox.Show("Failed to add new Ydr");
+                return;
+            }
             LoadYdrFromFile(newYdr, filePath);
             EnsureDrawableArchetype(newYdr, "rm_plaza.ytyp");
         }
@@ -10100,6 +10127,20 @@ namespace CodeWalker.Project
                 YbnFile reloadedYbn = CurrentProjectFile.AddYbnFile(filePath);
                 LoadYbnFromFile(ybn, filePath);
             }
+            else if (assetType == GameFileType.Ymap)
+            {
+                YmapFile ymap = CurrentProjectFile.YmapFiles.FirstOrDefault(ymap_ => ymap_.Name.Equals(assetName));
+                if (ymap == null)
+                {
+                    MessageBox.Show($"Asset {assetName} queued for reloading, could not be found");
+                    return;
+                }
+                CurrentProjectFile.RemoveYmapFile(ymap);
+                var ymapNew = CurrentProjectFile.AddYmapFile(ymap.FilePath);
+                if (ymap != null) LoadYmapFromFile(ymapNew, ymap.FilePath);
+                CurrentYmapFile = ymapNew;
+
+            }
         }
 
         private void LoadYmapInBlender()
@@ -10108,6 +10149,27 @@ namespace CodeWalker.Project
 
         }
 
+        private AudioPlacement copiedZone;
+        private void copyAmbientZoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            copiedZone = CurrentAudioZone;
+        }
+
+
+        private void pasteAmbientZoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CurrentAudioFile.AddRelData(copiedZone.AudioZone);
+            LoadProjectTree();
+
+            ShowEditAudioZonePanel(false);
+        }
+
+
         #endregion
+
+        private void reloadCurrentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

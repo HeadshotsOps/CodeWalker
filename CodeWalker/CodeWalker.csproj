@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeWalker.Core\CodeWalker.Core.csproj" />
-    <ProjectReference Include="..\CodeWalker.SdkExtensions\CodeWalker.SdkExtensions.csproj" />
     <ProjectReference Include="..\CodeWalker.WinForms\CodeWalker.WinForms.csproj" />
   </ItemGroup>
 

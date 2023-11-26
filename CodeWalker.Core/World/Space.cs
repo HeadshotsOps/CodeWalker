@@ -50,7 +50,10 @@ namespace CodeWalker.World
         private int CurrentHour;
         private MetaHash CurrentWeather;
 
-
+        public void AddBoundsKey(SpaceBoundsKey key, BoundsStoreItem boundsStoreItem)
+        {
+            boundsdict[key] = boundsStoreItem;
+        }
         public void Init(GameFileCache gameFileCache, Action<string> updateStatus)
         {
             GameFileCache = gameFileCache;
@@ -1815,6 +1818,13 @@ namespace CodeWalker.World
             {
                 RootNode.Add(item);
             }
+            RootNode.TrySplit(SplitThreshold);
+        }
+
+        public void AddBoundItems(BoundsStoreItem item)
+        {
+
+            RootNode.Add(item);
             RootNode.TrySplit(SplitThreshold);
         }
 

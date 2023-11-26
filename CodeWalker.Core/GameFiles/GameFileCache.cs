@@ -2267,6 +2267,10 @@ namespace CodeWalker.GameFiles
             lock (requestSyncRoot)
             {
                 var key = new GameFileCacheKey(hash, GameFileType.Ybn);
+                if (projectFiles.TryGetValue(key, out GameFile pgf))
+                {
+                    return pgf as YbnFile;
+                }
                 YbnFile ybn = mainCache.TryGet(key) as YbnFile;
                 if (ybn == null)
                 {

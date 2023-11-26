@@ -26,6 +26,7 @@ using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Windows.Shapes;
 using CodeWalker.CustomExtensions;
+using System.Security.Policy;
 
 namespace CodeWalker
 {
@@ -487,7 +488,6 @@ namespace CodeWalker
             return true;
         }
 
-
         private void UpdateTimeOfDayLabel()
         {
             int v = TimeOfDayTrackBar.Value;
@@ -822,8 +822,12 @@ namespace CodeWalker
 
         private void RenderWorldWaterQuads()
         {
-            var quads = RenderWorldBaseWaterQuads(water.WaterQuads, MapSelectionMode.WaterQuad);
-            Renderer.RenderWaterQuads(quads);
+            lock (water.WaterQuads)
+            {
+                var quads = RenderWorldBaseWaterQuads(water.WaterQuads, MapSelectionMode.WaterQuad);
+                Renderer.RenderWaterQuads(quads);
+            }
+
         }
 
         private void RenderWorldWaterCalmingQuads() => RenderWorldBaseWaterQuads(water.CalmingQuads, MapSelectionMode.CalmingQuad);
@@ -4157,7 +4161,7 @@ namespace CodeWalker
             UpdateCloudTypesComboBox(clouds);
 
             UpdateStatus("Loading water...");
-            water.Init(gameFileCache, UpdateStatus);
+            water.Init(gameFileCache, UpdateStatus, WaterFileArea.BASE);
 
             UpdateStatus("Loading trains...");
             trains.Init(gameFileCache, UpdateStatus);
@@ -7878,6 +7882,41 @@ namespace CodeWalker
         private void btnExportYmap_Click(object sender, EventArgs e)
         {
             LoadYmapInBlender();
+        }
+
+        public void SetWaterFile(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                MessageBox.Show($"{fileName} is not a valid file on the filesystem");
+                return;
+            }
+
+            lock (water.WaterQuads)
+            {
+                UpdateStatus("Loading water...");
+                water.Init(gameFileCache, UpdateStatus, WaterFileArea.CUSTOM, fileName);
+            }
+
+        }
+        private void WorldHeistWaterheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            lock (water.WaterQuads)
+            {
+                UpdateStatus("Loading water...");
+                WaterFileArea area = WorldHeistWaterheckBox.Checked ? WaterFileArea.HEISTISLAND : WaterFileArea.BASE;
+                water.Init(gameFileCache, UpdateStatus, area);
+            }
+
+        }
+
+        public void AddYbnToBoundsStore(YbnFile ybnFile)
+        {
+            BoundsStoreItem item = new BoundsStoreItem(ybnFile.Bounds);
+            item.Name = JenkHash.GenHash(ybnFile.RpfFileEntry.GetShortNameLower());
+            SpaceBoundsKey key = new SpaceBoundsKey(item.Name, item.Min);
+            space.AddBoundsKey(key, item);
+            space.BoundsStore.AddBoundItems(item);
         }
     }
 

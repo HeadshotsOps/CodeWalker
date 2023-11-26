@@ -616,5 +616,10 @@ namespace CodeWalker.Project.Panels
             ProjectForm.SetProjectItem(CurrentZone);
             ProjectForm.DeleteAudioZone();
         }
+        public AudioPlacement CopiedZone { get; set; }
+        private void BtnCopyAudio_Click(object sender, EventArgs e)
+        {
+            CopiedZone = CurrentZone;
+        }
     }
 }

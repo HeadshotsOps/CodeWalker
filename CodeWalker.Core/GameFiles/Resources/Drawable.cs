@@ -5326,7 +5326,7 @@ namespace CodeWalker.GameFiles
             //}
 
             //map the shaders to the geometries
-            if (shaderGrp != null)
+            if (shaderGrp != null && shaderGrp.Shaders != null)
             {
                 var shaders = shaderGrp.Shaders.data_items;
                 foreach (DrawableModel model in AllModels)

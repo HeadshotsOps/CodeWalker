@@ -9,6 +9,12 @@ using System.Xml;
 
 namespace CodeWalker.World
 {
+    public enum WaterFileArea
+    {
+        BASE,
+        HEISTISLAND,
+        CUSTOM
+    }
     public class Water
     {
         public volatile bool Inited = false;
@@ -16,16 +22,40 @@ namespace CodeWalker.World
         public List<WaterQuad> WaterQuads = new List<WaterQuad>();
         public List<WaterCalmingQuad> CalmingQuads = new List<WaterCalmingQuad>();
         public List<WaterWaveQuad> WaveQuads = new List<WaterWaveQuad>();
-
-        public void Init(GameFileCache gameFileCache, Action<string> updateStatus)
+        public string FilenameVanilla = "common.rpf\\data\\levels\\gta5\\water.xml";
+        public string FilenameHeistIsland = "update\\update.rpf\\common\\data\\levels\\gta5\\water_heistisland.xml";
+        public string FilenameCustom = null;
+        public void Init(GameFileCache gameFileCache, Action<string> updateStatus, WaterFileArea area, string customFile = null)
         {
             GameFileCache = gameFileCache;
 
             var rpfman = gameFileCache.RpfMan;
+            string filename = FilenameVanilla;
+            switch (area)
+            {
+                case WaterFileArea.HEISTISLAND:
+                    filename = FilenameHeistIsland;
+                    break;
+                case WaterFileArea.CUSTOM:
+                    filename = customFile;
+                    FilenameCustom = filename;
+                    break;
+                default:
+                    filename = FilenameVanilla;
+                    break;
+            }
 
-            string filename = "common.rpf\\data\\levels\\gta5\\water.xml";
 
-            XmlDocument waterxml = rpfman.GetFileXml(filename);
+            XmlDocument waterxml;
+            if (area != WaterFileArea.CUSTOM)
+            {
+                waterxml = rpfman.GetFileXml(filename);
+            }
+            else
+            {
+                waterxml = new XmlDocument();
+                waterxml.Load(filename);
+            }
 
             XmlElement waterdata = waterxml.DocumentElement;
 
@@ -78,6 +108,7 @@ namespace CodeWalker.World
             }
 
             return quads;
+           
         }
 
     }

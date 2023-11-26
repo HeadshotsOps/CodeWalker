@@ -45,6 +45,7 @@ namespace CodeWalker.Project
         public List<YddFile> YddFiles { get; set; } = new List<YddFile>();
         public List<YftFile> YftFiles { get; set; } = new List<YftFile>();
         public List<YtdFile> YtdFiles { get; set; } = new List<YtdFile>();
+        public string WaterFilePath { get; set; } = null;
 
 
 

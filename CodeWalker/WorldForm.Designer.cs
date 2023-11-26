@@ -46,6 +46,7 @@ namespace CodeWalker
             this.ViewTabPage = new System.Windows.Forms.TabPage();
             this.ViewTabControl = new System.Windows.Forms.TabControl();
             this.ViewWorldTabPage = new System.Windows.Forms.TabPage();
+            this.WorldHeistWaterheckBox = new System.Windows.Forms.CheckBox();
             this.WorldNorthYanktonYmapsCheckBox = new System.Windows.Forms.CheckBox();
             this.EnableModsCheckBox = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
@@ -93,6 +94,7 @@ namespace CodeWalker
             this.SelectionNameTextBox = new System.Windows.Forms.TextBox();
             this.SelectionTabControl = new System.Windows.Forms.TabControl();
             this.SelectionEntityTabPage = new System.Windows.Forms.TabPage();
+            this.btnExportYmap = new System.Windows.Forms.Button();
             this.btnOpenInBlender = new System.Windows.Forms.Button();
             this.btnExportXml = new System.Windows.Forms.Button();
             this.SelEntityPropertyGrid = new CodeWalker.WinForms.ReadOnlyPropertyGrid();
@@ -314,7 +316,6 @@ namespace CodeWalker
             this.ToolbarPanel = new System.Windows.Forms.Panel();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.SubtitleTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnExportYmap = new System.Windows.Forms.Button();
             this.StatusStrip.SuspendLayout();
             this.ToolsPanel.SuspendLayout();
             this.ToolsTabControl.SuspendLayout();
@@ -563,6 +564,7 @@ namespace CodeWalker
             // 
             // ViewWorldTabPage
             // 
+            this.ViewWorldTabPage.Controls.Add(this.WorldHeistWaterheckBox);
             this.ViewWorldTabPage.Controls.Add(this.WorldNorthYanktonYmapsCheckBox);
             this.ViewWorldTabPage.Controls.Add(this.EnableModsCheckBox);
             this.ViewWorldTabPage.Controls.Add(this.label30);
@@ -588,12 +590,26 @@ namespace CodeWalker
             this.ViewWorldTabPage.Text = "World";
             this.ViewWorldTabPage.UseVisualStyleBackColor = true;
             // 
+            // WorldHeistWaterheckBox
+            // 
+            this.WorldHeistWaterheckBox.AutoSize = true;
+            this.WorldHeistWaterheckBox.Checked = true;
+            this.WorldHeistWaterheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.WorldHeistWaterheckBox.Location = new System.Drawing.Point(8, 295);
+            this.WorldHeistWaterheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.WorldHeistWaterheckBox.Name = "WorldHeistWaterheckBox";
+            this.WorldHeistWaterheckBox.Size = new System.Drawing.Size(195, 24);
+            this.WorldHeistWaterheckBox.TabIndex = 72;
+            this.WorldHeistWaterheckBox.Text = "Use Cayo Perico water";
+            this.WorldHeistWaterheckBox.UseVisualStyleBackColor = true;
+            this.WorldHeistWaterheckBox.CheckedChanged += new System.EventHandler(this.WorldHeistWaterheckBox_CheckedChanged);
+            // 
             // WorldNorthYanktonYmapsCheckBox
             // 
             this.WorldNorthYanktonYmapsCheckBox.AutoSize = true;
             this.WorldNorthYanktonYmapsCheckBox.Checked = true;
             this.WorldNorthYanktonYmapsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.WorldNorthYanktonYmapsCheckBox.Location = new System.Drawing.Point(9, 246);
+            this.WorldNorthYanktonYmapsCheckBox.Location = new System.Drawing.Point(9, 329);
             this.WorldNorthYanktonYmapsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.WorldNorthYanktonYmapsCheckBox.Name = "WorldNorthYanktonYmapsCheckBox";
             this.WorldNorthYanktonYmapsCheckBox.Size = new System.Drawing.Size(182, 24);
@@ -606,7 +622,7 @@ namespace CodeWalker
             // 
             this.EnableModsCheckBox.AutoSize = true;
             this.EnableModsCheckBox.Enabled = false;
-            this.EnableModsCheckBox.Location = new System.Drawing.Point(9, 431);
+            this.EnableModsCheckBox.Location = new System.Drawing.Point(9, 514);
             this.EnableModsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EnableModsCheckBox.Name = "EnableModsCheckBox";
             this.EnableModsCheckBox.Size = new System.Drawing.Size(128, 24);
@@ -618,7 +634,7 @@ namespace CodeWalker
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(2, 518);
+            this.label30.Location = new System.Drawing.Point(2, 601);
             this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(86, 20);
@@ -632,7 +648,7 @@ namespace CodeWalker
             this.DlcLevelComboBox.FormattingEnabled = true;
             this.DlcLevelComboBox.Items.AddRange(new object[] {
             "<Loading...>"});
-            this.DlcLevelComboBox.Location = new System.Drawing.Point(93, 514);
+            this.DlcLevelComboBox.Location = new System.Drawing.Point(93, 597);
             this.DlcLevelComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DlcLevelComboBox.Name = "DlcLevelComboBox";
             this.DlcLevelComboBox.Size = new System.Drawing.Size(187, 28);
@@ -644,7 +660,7 @@ namespace CodeWalker
             // 
             this.EnableDlcCheckBox.AutoSize = true;
             this.EnableDlcCheckBox.Enabled = false;
-            this.EnableDlcCheckBox.Location = new System.Drawing.Point(9, 478);
+            this.EnableDlcCheckBox.Location = new System.Drawing.Point(9, 561);
             this.EnableDlcCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EnableDlcCheckBox.Name = "EnableDlcCheckBox";
             this.EnableDlcCheckBox.Size = new System.Drawing.Size(121, 24);
@@ -658,7 +674,7 @@ namespace CodeWalker
             this.WorldYmapWeatherFilterCheckBox.AutoSize = true;
             this.WorldYmapWeatherFilterCheckBox.Checked = true;
             this.WorldYmapWeatherFilterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.WorldYmapWeatherFilterCheckBox.Location = new System.Drawing.Point(9, 365);
+            this.WorldYmapWeatherFilterCheckBox.Location = new System.Drawing.Point(9, 448);
             this.WorldYmapWeatherFilterCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.WorldYmapWeatherFilterCheckBox.Name = "WorldYmapWeatherFilterCheckBox";
             this.WorldYmapWeatherFilterCheckBox.Size = new System.Drawing.Size(201, 24);
@@ -672,7 +688,7 @@ namespace CodeWalker
             this.WorldYmapTimeFilterCheckBox.AutoSize = true;
             this.WorldYmapTimeFilterCheckBox.Checked = true;
             this.WorldYmapTimeFilterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.WorldYmapTimeFilterCheckBox.Location = new System.Drawing.Point(9, 329);
+            this.WorldYmapTimeFilterCheckBox.Location = new System.Drawing.Point(9, 412);
             this.WorldYmapTimeFilterCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.WorldYmapTimeFilterCheckBox.Name = "WorldYmapTimeFilterCheckBox";
             this.WorldYmapTimeFilterCheckBox.Size = new System.Drawing.Size(221, 24);
@@ -686,7 +702,7 @@ namespace CodeWalker
             this.WorldScriptedYmapsCheckBox.AutoSize = true;
             this.WorldScriptedYmapsCheckBox.Checked = true;
             this.WorldScriptedYmapsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.WorldScriptedYmapsCheckBox.Location = new System.Drawing.Point(9, 280);
+            this.WorldScriptedYmapsCheckBox.Location = new System.Drawing.Point(9, 363);
             this.WorldScriptedYmapsCheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.WorldScriptedYmapsCheckBox.Name = "WorldScriptedYmapsCheckBox";
             this.WorldScriptedYmapsCheckBox.Size = new System.Drawing.Size(185, 24);
@@ -1218,6 +1234,16 @@ namespace CodeWalker
             this.SelectionEntityTabPage.TabIndex = 0;
             this.SelectionEntityTabPage.Text = "Entity";
             this.SelectionEntityTabPage.UseVisualStyleBackColor = true;
+            // 
+            // btnExportYmap
+            // 
+            this.btnExportYmap.Location = new System.Drawing.Point(24, 697);
+            this.btnExportYmap.Name = "btnExportYmap";
+            this.btnExportYmap.Size = new System.Drawing.Size(254, 47);
+            this.btnExportYmap.TabIndex = 38;
+            this.btnExportYmap.Text = "Open Ymap in Blender";
+            this.btnExportYmap.UseVisualStyleBackColor = true;
+            this.btnExportYmap.Click += new System.EventHandler(this.btnExportYmap_Click);
             // 
             // btnOpenInBlender
             // 
@@ -3824,16 +3850,6 @@ namespace CodeWalker
             // 
             this.SubtitleTimer.Tick += new System.EventHandler(this.SubtitleTimer_Tick);
             // 
-            // btnExportYmap
-            // 
-            this.btnExportYmap.Location = new System.Drawing.Point(24, 697);
-            this.btnExportYmap.Name = "btnExportYmap";
-            this.btnExportYmap.Size = new System.Drawing.Size(254, 47);
-            this.btnExportYmap.TabIndex = 38;
-            this.btnExportYmap.Text = "Open Ymap in Blender";
-            this.btnExportYmap.UseVisualStyleBackColor = true;
-            this.btnExportYmap.Click += new System.EventHandler(this.btnExportYmap_Click);
-            // 
             // WorldForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4209,5 +4225,6 @@ namespace CodeWalker
         private System.Windows.Forms.Button btnOpenInBlender;
         private System.Windows.Forms.CheckBox WorldNorthYanktonYmapsCheckBox;
         private System.Windows.Forms.Button btnExportYmap;
+        private System.Windows.Forms.CheckBox WorldHeistWaterheckBox;
     }
 }

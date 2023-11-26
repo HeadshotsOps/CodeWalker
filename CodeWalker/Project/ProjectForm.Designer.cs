@@ -53,6 +53,7 @@
             this.FileSaveProjectAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FileSaveItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FileSaveItemAsMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileSaveItemAllMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EditMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EditUndoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EditRedoMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,6 +182,8 @@
             this.AudioNewAmbientZoneListMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AudioNewInteriorMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AudioNewInteriorRoomMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyAmbientZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteAmbientZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.AudioAddToProjectMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AudioRemoveFromProjectMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -215,7 +218,7 @@
             this.ToolbarSaveAllButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.FileSaveItemAllMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.MainToolbar.SuspendLayout();
             this.SuspendLayout();
@@ -262,7 +265,8 @@
             this.FileSaveProjectAsMenu,
             this.FileSaveItemMenu,
             this.FileSaveItemAsMenu,
-            this.FileSaveItemAllMenu});
+            this.FileSaveItemAllMenu,
+            this.reloadCurrentToolStripMenuItem});
             this.FileMenu.Name = "FileMenu";
             this.FileMenu.Size = new System.Drawing.Size(54, 29);
             this.FileMenu.Text = "File";
@@ -424,6 +428,13 @@
             this.FileSaveItemAsMenu.Text = "Save Item As...";
             this.FileSaveItemAsMenu.Visible = false;
             this.FileSaveItemAsMenu.Click += new System.EventHandler(this.FileSaveItemAsMenu_Click);
+            // 
+            // FileSaveItemAllMenu
+            // 
+            this.FileSaveItemAllMenu.Name = "FileSaveItemAllMenu";
+            this.FileSaveItemAllMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveItemAllMenu.Text = "Save All";
+            this.FileSaveItemAllMenu.Click += new System.EventHandler(this.FileSaveItemAllMenu_Click);
             // 
             // EditMenu
             // 
@@ -1384,6 +1395,8 @@
             this.AudioNewAmbientZoneListMenu,
             this.AudioNewInteriorMenu,
             this.AudioNewInteriorRoomMenu,
+            this.copyAmbientZoneToolStripMenuItem,
+            this.pasteAmbientZoneToolStripMenuItem,
             this.toolStripSeparator24,
             this.AudioAddToProjectMenu,
             this.AudioRemoveFromProjectMenu});
@@ -1451,6 +1464,20 @@
             this.AudioNewInteriorRoomMenu.Size = new System.Drawing.Size(326, 34);
             this.AudioNewInteriorRoomMenu.Text = "New Interior Room";
             this.AudioNewInteriorRoomMenu.Click += new System.EventHandler(this.AudioNewInteriorRoomMenu_Click);
+            // 
+            // copyAmbientZoneToolStripMenuItem
+            // 
+            this.copyAmbientZoneToolStripMenuItem.Name = "copyAmbientZoneToolStripMenuItem";
+            this.copyAmbientZoneToolStripMenuItem.Size = new System.Drawing.Size(326, 34);
+            this.copyAmbientZoneToolStripMenuItem.Text = "Copy Ambient Zone";
+            this.copyAmbientZoneToolStripMenuItem.Click += new System.EventHandler(this.copyAmbientZoneToolStripMenuItem_Click);
+            // 
+            // pasteAmbientZoneToolStripMenuItem
+            // 
+            this.pasteAmbientZoneToolStripMenuItem.Name = "pasteAmbientZoneToolStripMenuItem";
+            this.pasteAmbientZoneToolStripMenuItem.Size = new System.Drawing.Size(326, 34);
+            this.pasteAmbientZoneToolStripMenuItem.Text = "Paste Ambient Zone";
+            this.pasteAmbientZoneToolStripMenuItem.Click += new System.EventHandler(this.pasteAmbientZoneToolStripMenuItem_Click);
             // 
             // toolStripSeparator24
             // 
@@ -1723,12 +1750,12 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 33);
             // 
-            // FileSaveItemAllMenu
+            // reloadCurrentToolStripMenuItem
             // 
-            this.FileSaveItemAllMenu.Name = "FileSaveItemAllMenu";
-            this.FileSaveItemAllMenu.Size = new System.Drawing.Size(270, 34);
-            this.FileSaveItemAllMenu.Text = "Save All";
-            this.FileSaveItemAllMenu.Click += new System.EventHandler(this.FileSaveItemAllMenu_Click);
+            this.reloadCurrentToolStripMenuItem.Name = "reloadCurrentToolStripMenuItem";
+            this.reloadCurrentToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.reloadCurrentToolStripMenuItem.Text = "Reload Current";
+            this.reloadCurrentToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentToolStripMenuItem_Click);
             // 
             // ProjectForm
             // 
@@ -1943,5 +1970,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteLODlightRangeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fiveMDeltasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem FileSaveItemAllMenu;
+        private System.Windows.Forms.ToolStripMenuItem copyAmbientZoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteAmbientZoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadCurrentToolStripMenuItem;
     }
 }
