@@ -71,7 +71,7 @@ namespace CodeWalker.Project.Panels
                 UnkBytesTextBox.Text = string.Empty;
                 Flags0TextBox.Text = string.Empty;
                 Flags1TextBox.Text = string.Empty;
-                Unk13TextBox.Text = string.Empty;
+                Flags2TextBox.Text = string.Empty;
                 Hash0TextBox.Text = string.Empty;
                 SceneTextBox.Text = string.Empty;
                 HashesTextBox.Text = string.Empty;
@@ -105,7 +105,7 @@ namespace CodeWalker.Project.Panels
                 UnkBytesTextBox.Text = string.Format("{0}, {1}, {2}", z.Unk14, z.Unk15, z.Unk16);
                 Flags0TextBox.Text = z.Flags0.Hex;
                 Flags1TextBox.Text = z.Flags1.Hex;
-                Unk13TextBox.Text = z.Unk13.Hex;
+                Flags2TextBox.Text = z.Flags2.Hex;
                 Hash0TextBox.Text = z.UnkHash0.ToString();
                 SceneTextBox.Text = z.Scene.ToString();
 
@@ -476,12 +476,12 @@ namespace CodeWalker.Project.Panels
             }
         }
 
-        private void Unk13TextBox_TextChanged(object sender, EventArgs e)
+        private void Flags2TextBox_TextChanged(object sender, EventArgs e)
         {
             if (populatingui) return;
             if (CurrentZone?.AudioZone == null) return;
 
-            var hashstr = Unk13TextBox.Text;
+            var hashstr = Flags2TextBox.Text;
             uint hash = 0;
             if (!uint.TryParse(hashstr, out hash))//don't re-hash hashes
             {
@@ -489,9 +489,9 @@ namespace CodeWalker.Project.Panels
                 JenkIndex.Ensure(hashstr);
             }
 
-            if (CurrentZone.AudioZone.Unk13 != hash)
+            if (CurrentZone.AudioZone.Flags2 != hash)
             {
-                CurrentZone.AudioZone.Unk13 = hash;
+                CurrentZone.AudioZone.Flags2     = hash;
 
                 ProjectItemChanged();
             }

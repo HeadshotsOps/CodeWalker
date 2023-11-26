@@ -5293,7 +5293,7 @@ namespace CodeWalker.GameFiles
         public MetaHash UnkHash0 { get; set; }
         public MetaHash Scene { get; set; }
         public Vector2 UnkVec3 { get; set; }
-        public MetaHash Unk13 { get; set; }
+        public MetaHash Flags2 { get; set; }
         public byte Unk14 { get; set; }
         public byte Unk15 { get; set; }
         public byte RulesCount { get; set; }
@@ -5365,7 +5365,7 @@ namespace CodeWalker.GameFiles
             UnkHash0 = br.ReadUInt32();
             Scene = br.ReadUInt32();
             UnkVec3 = new Vector2(br.ReadSingle(), br.ReadSingle());
-            Unk13 = br.ReadUInt32();
+            Flags2 = br.ReadUInt32();
             Unk14 = br.ReadByte();
             Unk15 = br.ReadByte();
             RulesCount = br.ReadByte();
@@ -5423,7 +5423,7 @@ namespace CodeWalker.GameFiles
             { }//no hit
             if (PlaybackZoneAngle > 360)
             { }//no hit
-            if (Unk13 != 0)
+            if (Flags2 != 0)
             { }//eg 0xAE64583B, 0x61083310, 0xCAE96294, 0x1C376176
             if (UnkHash0 != 0)
             { }
@@ -5493,7 +5493,7 @@ namespace CodeWalker.GameFiles
             bw.Write(Scene);
             bw.Write(UnkVec3.X);
             bw.Write(UnkVec3.Y);
-            bw.Write(Unk13);
+            bw.Write(Flags2);
             bw.Write(Unk14);
             bw.Write(Unk15);
             bw.Write(RulesCount);
@@ -5536,7 +5536,7 @@ namespace CodeWalker.GameFiles
             RelXml.StringTag(sb, indent, "UnkHash0", RelXml.HashString(UnkHash0));
             RelXml.StringTag(sb, indent, "Scene", RelXml.HashString(Scene));
             RelXml.SelfClosingTag(sb, indent, "UnkVec3 " + FloatUtil.GetVector2XmlString(UnkVec3));
-            RelXml.StringTag(sb, indent, "Unk13", RelXml.HashString(Unk13));
+            RelXml.StringTag(sb, indent, "Unk13", RelXml.HashString(Flags2));
             RelXml.ValueTag(sb, indent, "Unk14", Unk14.ToString());
             RelXml.ValueTag(sb, indent, "Unk15", Unk15.ToString());
             RelXml.ValueTag(sb, indent, "Unk16", Unk16.ToString());
@@ -5565,7 +5565,7 @@ namespace CodeWalker.GameFiles
             UnkHash0 = XmlRel.GetHash(Xml.GetChildInnerText(node, "UnkHash0"));
             Scene = XmlRel.GetHash(Xml.GetChildInnerText(node, "Scene"));
             UnkVec3 = Xml.GetChildVector2Attributes(node, "UnkVec3");
-            Unk13 = XmlRel.GetHash(Xml.GetChildInnerText(node, "Unk13"));
+            Flags2 = XmlRel.GetHash(Xml.GetChildInnerText(node, "Unk13"));
             Unk14 = (byte)Xml.GetChildUIntAttribute(node, "Unk14", "value");
             Unk15 = (byte)Xml.GetChildUIntAttribute(node, "Unk15", "value");
             Unk16 = (byte)Xml.GetChildUIntAttribute(node, "Unk16", "value");

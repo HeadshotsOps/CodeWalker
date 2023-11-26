@@ -40,7 +40,7 @@
             this.DeleteButton = new System.Windows.Forms.Button();
             this.AddToProjectButton = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
-            this.Unk13TextBox = new System.Windows.Forms.TextBox();
+            this.Flags2TextBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.DependentAmbiencesTextBox = new CodeWalker.WinForms.TextBoxFix();
             this.label19 = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@
             this.tabPage1.Controls.Add(this.DeleteButton);
             this.tabPage1.Controls.Add(this.AddToProjectButton);
             this.tabPage1.Controls.Add(this.label21);
-            this.tabPage1.Controls.Add(this.Unk13TextBox);
+            this.tabPage1.Controls.Add(this.Flags2TextBox);
             this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.DependentAmbiencesTextBox);
             this.tabPage1.Controls.Add(this.label19);
@@ -813,7 +813,7 @@
         private WinForms.TextBoxFix DependentAmbiencesTextBox;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox Unk13TextBox;
+        private System.Windows.Forms.TextBox Flags2TextBox;
         private System.Windows.Forms.Button AddToProjectButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Label label22;

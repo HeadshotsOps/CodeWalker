@@ -6599,7 +6599,7 @@ namespace CodeWalker.Project
             zone.UnkHash0 = cp ? copy.AudioZone.UnkHash0 : 0;
             zone.Scene = cp ? copy.AudioZone.Scene : 0;
             zone.UnkVec3 = cp ? copy.AudioZone.UnkVec3 : new Vector2(-1, 0);
-            zone.Unk13 = cp ? copy.AudioZone.Unk13 : 0;
+            zone.Flags2 = cp ? copy.AudioZone.Flags2 : 0;
             zone.Unk14 = cp ? copy.AudioZone.Unk14 : (byte)4;
             zone.Unk15 = cp ? copy.AudioZone.Unk15 : (byte)1;
             zone.Unk16 = cp ? copy.AudioZone.Unk16 : (byte)0;
