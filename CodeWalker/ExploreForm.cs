@@ -27,6 +27,7 @@ namespace CodeWalker
         private volatile bool Ready = false;
 
         private Dictionary<string, FileTypeInfo> FileTypes;
+        private readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
 
         private MainTreeFolder RootFolder;
         private List<MainTreeFolder> ExtraRootFolders = new List<MainTreeFolder>();
@@ -296,7 +297,7 @@ namespace CodeWalker
             InitFileType(".fxc", "Compiled Shaders", 9, FileTypeAction.ViewFxc, true);
             InitFileType(".yed", "Expression Dictionary", 9, FileTypeAction.ViewYed, true);
             InitFileType(".yld", "Cloth Dictionary", 9, FileTypeAction.ViewYld, true);
-            InitFileType(".yfd", "Frame Filter Dictionary", 9, FileTypeAction.ViewYfd);
+            InitFileType(".yfd", "Frame Filter Dictionary", 9, FileTypeAction.ViewYfd, true);
             InitFileType(".asi", "ASI Plugin", 9);
             InitFileType(".dll", "Dynamic Link Library", 9);
             InitFileType(".exe", "Executable", 10);
@@ -313,7 +314,7 @@ namespace CodeWalker
             InitFileType(".png", "Portable Network Graphics", 16);
             InitFileType(".dds", "DirectDraw Surface", 16);
             InitFileType(".ytd", "Texture Dictionary", 16, FileTypeAction.ViewYtd, true);
-            InitFileType(".mrf", "Move Network File", 18, FileTypeAction.ViewMrf);
+            InitFileType(".mrf", "Move Network File", 18, FileTypeAction.ViewMrf, true);
             InitFileType(".ycd", "Clip Dictionary", 18, FileTypeAction.ViewYcd, true);
             InitFileType(".ypt", "Particle Effect", 18, FileTypeAction.ViewModel, true);
             InitFileType(".ybn", "Static Collisions", 19, FileTypeAction.ViewModel, true);
@@ -348,8 +349,12 @@ namespace CodeWalker
         }
         public FileTypeInfo GetFileType(string fn)
         {
-            var fi = new FileInfo(fn);
-            var ext = fi.Extension.ToLowerInvariant();
+            if (fn.IndexOfAny(InvalidFileNameChars) != -1)
+            {
+                return FileTypes[""];
+            }
+
+            var ext = Path.GetExtension(fn).ToLowerInvariant();
             if (!string.IsNullOrEmpty(ext))
             {
                 FileTypeInfo ft;
@@ -1793,9 +1798,9 @@ namespace CodeWalker
         private void ViewYfd(string name, string path, byte[] data, RpfFileEntry e)
         {
             var yfd = RpfFile.GetFile<YfdFile>(e, data);
-            GenericForm f = new GenericForm(this);
+            MetaForm f = new MetaForm(this);
             f.Show();
-            f.LoadFile(yfd, yfd.RpfFileEntry);
+            f.LoadMeta(yfd);
         }
         private void ViewCacheDat(string name, string path, byte[] data, RpfFileEntry e)
         {
@@ -1814,9 +1819,9 @@ namespace CodeWalker
         private void ViewMrf(string name, string path, byte[] data, RpfFileEntry e)
         {
             var mrf = RpfFile.GetFile<MrfFile>(e, data);
-            GenericForm f = new GenericForm(this);
+            MetaForm f = new MetaForm(this);
             f.Show();
-            f.LoadFile(mrf, mrf.RpfFileEntry);
+            f.LoadMeta(mrf);
         }
         private void ViewNametable(string name, string path, byte[] data, RpfFileEntry e)
         {

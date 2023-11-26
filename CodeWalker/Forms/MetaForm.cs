@@ -388,6 +388,34 @@ namespace CodeWalker.Forms
                 metaFormat = MetaFormat.Ypdb;
             }
         }
+        public void LoadMeta(YfdFile yfd)
+        {
+            var fn = ((yfd?.RpfFileEntry?.Name) ?? "") + ".xml";
+            Xml = MetaXml.GetXml(yfd, out fn);
+            FileName = fn;
+            RawPropertyGrid.SelectedObject = yfd;
+            rpfFileEntry = yfd?.RpfFileEntry;
+            modified = false;
+            metaFormat = MetaFormat.XML;
+            if (yfd?.RpfFileEntry != null)
+            {
+                metaFormat = MetaFormat.Yfd;
+            }
+        }
+        public void LoadMeta(MrfFile mrf)
+        {
+            var fn = ((mrf?.RpfFileEntry?.Name) ?? "") + ".xml";
+            Xml = MrfXml.GetXml(mrf);
+            FileName = fn;
+            RawPropertyGrid.SelectedObject = mrf;
+            rpfFileEntry = mrf?.RpfFileEntry;
+            modified = false;
+            metaFormat = MetaFormat.XML;
+            if (mrf?.RpfFileEntry != null)
+            {
+                metaFormat = MetaFormat.Mrf;
+            }
+        }
 
 
 

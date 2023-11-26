@@ -127,6 +127,11 @@ namespace CodeWalker.GameFiles
                 YpdbFile ypdb = RpfFile.GetFile<YpdbFile>(e, data);
                 return GetXml(ypdb, out filename);
             }
+            else if (fnl.EndsWith(".yfd"))
+            {
+                YfdFile yfd = RpfFile.GetFile<YfdFile>(e, data);
+                return GetXml(yfd, out filename);
+            }
             else if (fnl.EndsWith(".awc"))
             {
                 AwcFile awc = RpfFile.GetFile<AwcFile>(e, data);
@@ -146,6 +151,11 @@ namespace CodeWalker.GameFiles
             {
                 HeightmapFile hmf = RpfFile.GetFile<HeightmapFile>(e, data);
                 return GetXml(hmf, out filename, outputfolder);
+            }
+            else if (fnl.EndsWith(".mrf"))
+            {
+                MrfFile mrf = RpfFile.GetFile<MrfFile>(e, data);
+                return GetXml(mrf, out filename, outputfolder);
             }
             filename = fn;
             return string.Empty;
@@ -290,6 +300,12 @@ namespace CodeWalker.GameFiles
             filename = fn + ".xml";
             return YpdbXml.GetXml(ypdb);
         }
+        public static string GetXml(YfdFile yfd, out string filename)
+        {
+            var fn = (yfd?.Name) ?? "";
+            filename = fn + ".xml";
+            return YfdXml.GetXml(yfd);
+        }
         public static string GetXml(AwcFile awc, out string filename, string outputfolder)
         {
             var fn = (awc?.Name) ?? "";
@@ -313,6 +329,12 @@ namespace CodeWalker.GameFiles
             var fn = (hmf?.Name) ?? "";
             filename = fn + ".xml";
             return HmapXml.GetXml(hmf);
+        }
+        public static string GetXml(MrfFile mrf, out string filename, string outputfolder)
+        {
+            var fn = (mrf?.Name) ?? "";
+            filename = fn + ".xml";
+            return MrfXml.GetXml(mrf);
         }
 
 
@@ -2231,6 +2253,8 @@ namespace CodeWalker.GameFiles
         Fxc = 20,
         Heightmap = 21,
         Ypdb = 22,
+        Mrf = 23,
+        Yfd = 24,
     }
 
 }

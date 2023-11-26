@@ -3373,6 +3373,7 @@ namespace CodeWalker.GameFiles
             Vertices = MetaTypes.ConvertDataArray<Vector3>(Data, 0, vertexCount);
             Indices = new byte[indexCount];
             Buffer.BlockCopy(Data, indicesOffset, Indices, 0, indexCount);
+            BuildTriangles();
         }
 
 
