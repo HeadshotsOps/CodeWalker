@@ -447,11 +447,11 @@ namespace CodeWalker.GameFiles
                      new MetaStructureEntryInfo_s((MetaName)MetaTypeName.ARRAYINFO, 0, MetaStructureEntryDataType.Hash, 0, 0, 0),
                      new MetaStructureEntryInfo_s(MetaName.RemoveList, 16, MetaStructureEntryDataType.Array, 0, 2, 0),
                      new MetaStructureEntryInfo_s((MetaName)MetaTypeName.ARRAYINFO, 0, MetaStructureEntryDataType.Hash, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)896120921, 32, MetaStructureEntryDataType.Array, 0, 4, 0),
+                     new MetaStructureEntryInfo_s(MetaName.PromoteToHDList, 32, MetaStructureEntryDataType.Array, 0, 4, 0),
                      new MetaStructureEntryInfo_s(MetaName.CamPos, 48, MetaStructureEntryDataType.Float_XYZ, 0, 0, 0),
                      new MetaStructureEntryInfo_s(MetaName.CamDir, 64, MetaStructureEntryDataType.Float_XYZ, 0, 0, 0),
                      new MetaStructureEntryInfo_s((MetaName)MetaTypeName.ARRAYINFO, 0, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)1762439591, 80, MetaStructureEntryDataType.Array, 0, 8, 0),
+                     new MetaStructureEntryInfo_s(MetaName.CommonAddSets, 80, MetaStructureEntryDataType.Array, 0, 8, 0),
                      new MetaStructureEntryInfo_s(MetaName.Flags, 96, MetaStructureEntryDataType.UnsignedInt, 0, 0, 0)
                     );
                 //case MetaName.CStreamingRequestFrame:
@@ -1057,17 +1057,17 @@ namespace CodeWalker.GameFiles
                     );
                 case MetaName.CComponentInfo:
                     return new MetaStructureInfo(MetaName.CComponentInfo, 3693847250, 512, 48,
-                     new MetaStructureEntryInfo_s((MetaName)802196719, 0, MetaStructureEntryDataType.Hash, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)4233133352, 4, MetaStructureEntryDataType.Hash, 0, 0, 0),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_audioID, 0, MetaStructureEntryDataType.Hash, 0, 0, 0),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_audioID2, 4, MetaStructureEntryDataType.Hash, 0, 0, 0),
                      new MetaStructureEntryInfo_s((MetaName)MetaTypeName.ARRAYINFO, 0, MetaStructureEntryDataType.Float, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)128864925, 8, MetaStructureEntryDataType.ArrayOfBytes, 0, 2, (MetaName)5),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_expressionMods, 8, MetaStructureEntryDataType.ArrayOfBytes, 0, 2, (MetaName)5),
                      new MetaStructureEntryInfo_s(MetaName.flags, 28, MetaStructureEntryDataType.UnsignedInt, 0, 0, 0),
                      new MetaStructureEntryInfo_s(MetaName.inclusions, 32, MetaStructureEntryDataType.IntFlags2, 0, 32, 0),
                      new MetaStructureEntryInfo_s(MetaName.exclusions, 36, MetaStructureEntryDataType.IntFlags2, 0, 32, 0),
-                     new MetaStructureEntryInfo_s((MetaName)1613922652, 40, MetaStructureEntryDataType.ShortFlags, 0, 16, MetaName.ePedVarComp),
-                     new MetaStructureEntryInfo_s((MetaName)2114993291, 42, MetaStructureEntryDataType.UnsignedShort, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)3509540765, 44, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)4196345791, 45, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0)
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_vfxComps, 40, MetaStructureEntryDataType.ShortFlags, 0, 16, MetaName.ePedVarComp),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_flags, 42, MetaStructureEntryDataType.UnsignedShort, 0, 0, 0),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_compIdx, 44, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0),
+                     new MetaStructureEntryInfo_s(MetaName.pedXml_drawblIdx, 45, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0)
                     );
                 case MetaName.CPedPropMetaData:
                     return new MetaStructureInfo(MetaName.CPedPropMetaData, 2029738350, 768, 56,
@@ -1081,7 +1081,7 @@ namespace CodeWalker.GameFiles
                      new MetaStructureEntryInfo_s(MetaName.flags, 48, MetaStructureEntryDataType.UnsignedShort, 0, 0, 0),
                      new MetaStructureEntryInfo_s(MetaName.anchorId, 50, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0),
                      new MetaStructureEntryInfo_s(MetaName.propId, 51, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0),
-                     new MetaStructureEntryInfo_s((MetaName)2894625425, 52, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0)
+                     new MetaStructureEntryInfo_s(MetaName.stickyness, 52, MetaStructureEntryDataType.UnsignedByte, 0, 0, 0)
                     );
                 case MetaName.CPedPropTexData:
                     return new MetaStructureInfo(MetaName.CPedPropTexData, 2767296137, 512, 12,
@@ -1759,49 +1759,35 @@ namespace CodeWalker.GameFiles
         }
 
 
-        public static T[] GetTypedDataArray<T>(Meta meta, MetaName name) where T : struct
+        public static T[] GetTypedPointerArray<T>(Meta meta, MetaName name, MetaPOINTER[] arr) where T : struct
         {
-            if ((meta == null) || (meta.DataBlocks == null)) return null;
-
+            //this is really a bad hack just for ymap entities so as not to completely rewrite all of the YmapFile stuff.
+            //there could be subclasses in the array, which the returned struct array can't handle.
+            //so, this will return a filtered list with only types matching the given name parameter.
+            //NOTE: this is very similar to ConvertDataArray(Meta, MetaName, Array_StructurePointer)
+            if (arr == null) return null;//use GetPointerArray for this parameter
             var datablocks = meta.DataBlocks.Data;
-
-            MetaDataBlock startblock = null;
-            int startblockind = -1;
-            for (int i = 0; i < datablocks.Count; i++)
+            if (datablocks == null) return null;
+            int tsize = Marshal.SizeOf(typeof(T));
+            var list = new List<T>();
+            for (int i = 0; i < arr.Length; i++)
             {
-                var block = datablocks[i];
-                if (block.StructureNameHash == name)
-                {
-                    startblock = block;
-                    startblockind = i;
-                    break;
-                }
+                ref var ptr = ref arr[i];
+                var blockind = ptr.BlockIndex;
+                if (blockind < 0) continue;
+                if (blockind >= datablocks.Count) continue;
+                var block = datablocks[blockind];
+                if (block == null) continue;
+                if (block.Data == null) continue;
+                if (block.StructureNameHash != name) continue;//filter only matching types
+                var offset = ptr.Offset;
+                if (offset < 0) continue;
+                if (offset + tsize > block.Data.Length) continue;
+                var item = ConvertData<T>(block.Data, offset);
+                list.Add(item);
             }
-            if (startblock == null)
-            {
-                return null; //couldn't find the data.
-            }
-
-            int count = 0; //try figure out how many items there are, from the block size(s).
-            int itemsize = Marshal.SizeOf(typeof(T));
-            var currentblock = startblock;
-            int currentblockind = startblockind;
-            while (currentblock != null)
-            {
-                int blockitems = currentblock.DataLength / itemsize;
-                count += blockitems;
-                currentblockind++;
-                if (currentblockind >= datablocks.Count) break; //last block, can't go any further
-                currentblock = datablocks[currentblockind];
-                if (currentblock.StructureNameHash != name) break; //not the right block type, can't go further
-            }
-
-            if (count <= 0)
-            {
-                return null; //didn't find anything...
-            }
-
-            return ConvertDataArray<T>(meta, name, (uint)startblockind + 1, (uint)count);
+            if (list.Count == 0) return null;
+            return list.ToArray();
         }
         public static T GetTypedData<T>(Meta meta, MetaName name) where T : struct
         {
@@ -2156,7 +2142,7 @@ namespace CodeWalker.GameFiles
         : byte //Key:3326075799
     {
         Move = 0,
-        Unk_7865678 = 1,
+        MoveIntoVehicleAsPassenger = 1,
         MoveFollowMaster = 2,
     }
 
@@ -2171,22 +2157,22 @@ namespace CodeWalker.GameFiles
     public enum CScenarioChainingEdge__eNavSpeed //SCENARIO (Path) Edge nav speed
         : byte //Key:1112851290
     {
-        Unk_00_3279574318 = 0,
-        Unk_01_2212923970 = 1,
-        Unk_02_4022799658 = 2,
-        Unk_03_1425672334 = 3,
-        Unk_04_957720931 = 4,
-        Unk_05_3795195414 = 5,
-        Unk_06_2834622009 = 6,
-        Unk_07_1876554076 = 7,
-        Unk_08_698543797 = 8,
-        Unk_09_1544199634 = 9,
-        Unk_10_2725613303 = 10,
-        Unk_11_4033265820 = 11,
-        Unk_12_3054809929 = 12,
-        Unk_13_3911005380 = 13,
-        Unk_14_3717649022 = 14,
-        Unk_15_3356026130 = 15,
+        kSpeed5Mph = 0,
+        kSpeed10Mph = 1,
+        kSpeed15Mph = 2,
+        kSpeed25Mph = 3,
+        kSpeed35Mph = 4,
+        kSpeed45Mph = 5,
+        kSpeed55Mph = 6,
+        kSpeed65Mph = 7,
+        kSpeed80Mph = 8,
+        kSpeed100Mph = 9,
+        kSpeed125Mph = 10,
+        kSpeed150Mph = 11,
+        kSpeed200Mph = 12,
+        kSpeedWalk = 13,
+        kSpeedRun = 14,
+        kSpeedSprint = 15,
     }
 
     public enum rage__fwArchetypeDef__eAssetType //archetype assetType
@@ -5581,8 +5567,8 @@ namespace CodeWalker.GameFiles
     {
         public CScenarioPointContainer Points { get; set; } //0   0: Structure: CScenarioPointContainer//2380938603: Points//702683191
         public rage__spdSphere ClusterSphere { get; set; } //48   48: Structure: 1062159465: ClusterSphere//352461053
-        public float Unk_1095875445 { get; set; } //64   64: Float: 0: 1095875445 //spawn chance? eg 5, 30
-        public byte Unk_3129415068 { get; set; } //68   68: Boolean: 0: 3129415068
+        public float NextSpawnAttemptDelay { get; set; } //64   64: Float: 0: 1095875445 //spawn chance? eg 5, 30
+        public byte AllPointsRequiredForSpawn { get; set; } //68   68: Boolean: 0: 3129415068
         public uint Unused0 { get; set; }//72
         public uint Unused1 { get; set; }//76
 
@@ -5618,8 +5604,8 @@ namespace CodeWalker.GameFiles
                 _Data.ClusterSphere = new rage__spdSphere() { centerAndRadius = v4 };
             }
         }
-        public float Unk1 { get { return _Data.Unk_1095875445; } set { _Data.Unk_1095875445 = value; } }
-        public bool Unk2 { get { return _Data.Unk_3129415068==1; } set { _Data.Unk_3129415068 = (byte)(value?1:0); } }
+        public float NextSpawnAttemptDelay { get { return _Data.NextSpawnAttemptDelay; } set { _Data.NextSpawnAttemptDelay = value; } }
+        public bool AllPointsRequiredForSpawn { get { return _Data.AllPointsRequiredForSpawn==1; } set { _Data.AllPointsRequiredForSpawn = (byte)(value?1:0); } }
 
         public MCScenarioPointCluster() { }
         public MCScenarioPointCluster(MCScenarioPointRegion region) { Region = region; }
@@ -5899,12 +5885,12 @@ namespace CodeWalker.GameFiles
     {
         public Array_uint AddList { get; set; } //0   0: Array: 0: AddList//327274266  {0: Hash: 0: 256}
         public Array_uint RemoveList { get; set; } //16   16: Array: 0: RemoveList//3372321331  {0: Hash: 0: 256}
-        public Array_uint Unk_896120921 { get; set; } //32   32: Array: 0: 896120921  {0: Hash: 0: 256}
+        public Array_uint PromoteToHDList { get; set; } //32   32: Array: 0: 896120921  {0: Hash: 0: 256}
         public Vector3 CamPos { get; set; } //48   48: Float_XYZ: 0: CamPos//357008256
         public float Unused0 { get; set; }//60
         public Vector3 CamDir { get; set; } //64   64: Float_XYZ: 0: CamDir//210316193
         public float Unused1 { get; set; }//76
-        public Array_byte Unk_1762439591 { get; set; } //80   80: Array: 0: 1762439591  {0: UnsignedByte: 0: 256}
+        public Array_byte CommonAddSets { get; set; } //80   80: Array: 0: 1762439591  {0: UnsignedByte: 0: 256}
         public uint Flags { get; set; } //96   96: UnsignedInt: 0: Flags
         public uint Unused2 { get; set; }//100
         public uint Unused3 { get; set; }//104
@@ -6391,21 +6377,16 @@ namespace CodeWalker.GameFiles
 
     [TC(typeof(EXP))] public struct CComponentInfo //48 bytes, Key:3693847250  //COMPONENT PEDS 
     {
-        public MetaHash Unk_802196719 { get; set; } //0   0: Hash: 0: 802196719
-        public MetaHash Unk_4233133352 { get; set; } //4   4: Hash: 0: 4233133352
-        public ArrayOfBytes5 Unk_128864925 { get; set; } //8   8: ArrayOfBytes: 5: 128864925
-        public byte Unused0 { get; set; }//13
-        public ushort Unused1 { get; set; }//14
-        public uint Unused2 { get; set; }//16
-        public uint Unused3 { get; set; }//20
-        public uint Unused4 { get; set; }//24
+        public MetaHash pedXml_audioID { get; set; } //0   0: Hash: 0: 802196719
+        public MetaHash pedXml_audioID2 { get; set; } //4   4: Hash: 0: 4233133352
+        public ArrayOfFloats5 pedXml_expressionMods { get; set; } //8   8: ArrayOfBytes: 5: 128864925
         public uint flags { get; set; } //28   28: UnsignedInt: 0: flags
         public int inclusions { get; set; } //32   32: IntFlags2: 0: inclusions//2172318933
         public int exclusions { get; set; } //36   36: IntFlags2: 0: exclusions
-        public ePedVarComp Unk_1613922652 { get; set; } //40   40: ShortFlags: ePedVarComp: 1613922652
-        public ushort Unk_2114993291 { get; set; } //42   42: UnsignedShort: 0: 2114993291
-        public byte Unk_3509540765 { get; set; } //44   44: UnsignedByte: 0: 3509540765
-        public byte Unk_4196345791 { get; set; } //45   45: UnsignedByte: 0: 4196345791
+        public ePedVarComp pedXml_vfxComps { get; set; } //40   40: ShortFlags: ePedVarComp: 1613922652
+        public ushort pedXml_flags { get; set; } //42   42: UnsignedShort: 0: 2114993291
+        public byte pedXml_compIdx { get; set; } //44   44: UnsignedByte: 0: 3509540765
+        public byte pedXml_drawblIdx { get; set; } //45   45: UnsignedByte: 0: 4196345791
         public ushort Unused5 { get; set; }//46
     }
     [TC(typeof(EXP))] public class MCComponentInfo : MetaWrapper
@@ -6416,8 +6397,8 @@ namespace CodeWalker.GameFiles
         public CComponentInfo Data { get { return _Data; } }
 
 
-        public int ComponentType { get { return _Data.Unk_3509540765; } }
-        public int ComponentIndex { get { return _Data.Unk_4196345791; } }
+        public int ComponentType { get { return _Data.pedXml_compIdx; } }
+        public int ComponentIndex { get { return _Data.pedXml_drawblIdx; } }
 
         public MCComponentInfo() { }
         public MCComponentInfo(Meta meta, CComponentInfo data, MCPedVariationInfo owner)
@@ -6524,7 +6505,7 @@ namespace CodeWalker.GameFiles
         public ushort flags { get; set; } //48   48: UnsignedShort: 0: flags
         public byte anchorId { get; set; } //50   50: UnsignedByte: 0: anchorId
         public byte propId { get; set; } //51   51: UnsignedByte: 0: propId
-        public byte Unk_2894625425 { get; set; } //52   52: UnsignedByte: 0: 2894625425
+        public byte stickyness { get; set; } //52   52: UnsignedByte: 0: 2894625425
         public byte Unused5 { get; set; }//53
         public ushort Unused6 { get; set; }//54
     }

@@ -49,10 +49,7 @@ namespace CodeWalker.World
         private int CurrentHour;
         private MetaHash CurrentWeather;
 
-        public void AddBoundsKey(SpaceBoundsKey key, BoundsStoreItem boundsStoreItem)
-        {
-            boundsdict[key] = boundsStoreItem;
-        }
+
         public void Init(GameFileCache gameFileCache, Action<string> updateStatus)
         {
             GameFileCache = gameFileCache;
@@ -709,7 +706,6 @@ namespace CodeWalker.World
         {
             var xDir = Math.Min(1, Math.Max(-1, desiredX - ynd.CellX));
             var yDir = Math.Min(1, Math.Max(-1, desiredY - ynd.CellY));
-
             var x = desiredX;
             var y = desiredY;
 
@@ -721,11 +717,9 @@ namespace CodeWalker.World
                     {
                         break;
                     }
-
                     x += xDir;
                 }
             }
-
             if (yDir != 0)
             {
                 while (y >= 0 && y <= 31)
@@ -734,16 +728,61 @@ namespace CodeWalker.World
                     {
                         break;
                     }
-
                     y += yDir;
                 }
             }
 
+            var dx = x - ynd.CellX;
+            var dy = y - ynd.CellY;
+            var areaId = y * 32 + x;
+            var areaIdorig = ynd.AreaID;
+            var changed = ynd.AreaID != areaId;
             ynd.CellX = x;
             ynd.CellY = y;
-            var areaId = y * 32 + x;
-            ynd.AreaID = areaId + (ynd.IsCayoGrid ? 1024 : 0);
+            ynd.AreaID = areaId;
             ynd.Name = $"nodes{areaId}";
+            if (changed)
+            {
+                var nodes = ynd.Nodes;
+                if (nodes != null)
+                {
+                    for (int i = 0; i < nodes.Length; i++)
+                    {
+                        var node = nodes[i];
+                        node.SetPosition(node.Position + new Vector3(512 * dx, 512 * dy, 0));
+                        if (node.AreaID == areaIdorig)
+                        {
+                            node.AreaID = (ushort)areaId;
+                        }
+                    }
+                }
+                var links = ynd.Links;
+                if (links != null)
+                {
+                    for (int i = 0; i < links.Length; i++)
+                    {
+                        var link = links[i];
+                        if (link._RawData.AreaID == areaIdorig)
+                        {
+                            link._RawData.AreaID = (ushort)areaId;
+                        }
+                    }
+                }
+                var juncs = ynd.Junctions;
+                if (juncs != null)
+                {
+                    for (int i = 0; i < juncs.Length; i++)
+                    {
+                        var junc = juncs[i];
+                        junc.PositionX += (short)(512 * dx);
+                        junc.PositionY += (short)(512 * dy);
+                    }
+                }
+                ynd.UpdateAllNodePositions();
+                ynd.UpdateBoundingBox();
+                ynd.UpdateTriangleVertices(null);
+                ynd.BuildStructs();
+            }
             NodeGrid.UpdateYnd(ynd);
         }
 
@@ -1932,13 +1971,6 @@ namespace CodeWalker.World
             RootNode.TrySplit(SplitThreshold);
         }
 
-        public void AddBoundItems(BoundsStoreItem item)
-        {
-
-            RootNode.Add(item);
-            RootNode.TrySplit(SplitThreshold);
-        }
-
         public List<BoundsStoreItem> GetItems(ref Vector3 min, ref Vector3 max, bool[] layers = null)
         {
             VisibleItems.Clear();
@@ -2107,27 +2139,7 @@ namespace CodeWalker.World
     public class SpaceNodeGrid
     {
         //node grid for V paths
-        public bool IsCayoGrid { get; set; }
-        private SpaceNodeGridCell[,] vanillaCells;
-        private SpaceNodeGridCell[,] cayoCells;
-        public SpaceNodeGridCell[,] Cells
-        {
-            get
-            {
-                return !IsCayoGrid ? vanillaCells : cayoCells;
-            }
-            set
-            {
-                if (IsCayoGrid)
-                {
-                    cayoCells = value;
-                }
-                else
-                {
-                    vanillaCells = value;
-                }
-            }
-        }
+        public SpaceNodeGridCell[,] Cells { get; set; }
         public float CellSize = 512.0f;
         public float CellSizeInv; //inverse of the cell size.
         public int CellCountX = 32;
@@ -2208,7 +2220,6 @@ namespace CodeWalker.World
         public int X;
         public int Y;
         public int ID;
-        public static bool IsCayoGrid { get; set; }
 
         public YndFile Ynd;
 

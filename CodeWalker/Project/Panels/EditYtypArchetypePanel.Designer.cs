@@ -39,6 +39,7 @@
             this.ArchetypeNameTextBox = new System.Windows.Forms.TextBox();
             this.ArchetypeFlagsTextBox = new System.Windows.Forms.TextBox();
             this.PhysicsDictionaryTextBox = new System.Windows.Forms.TextBox();
+            this.DrawableDictionaryTextBox = new System.Windows.Forms.TextBox();
             this.ClipDictionaryTextBox = new System.Windows.Forms.TextBox();
             this.AssetNameTextBox = new System.Windows.Forms.TextBox();
             this.TextureDictTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.PhysicsDictHashLabel = new System.Windows.Forms.Label();
+            this.DrawableDictHashLabel = new System.Windows.Forms.Label();
             this.TextureDictHashLabel = new System.Windows.Forms.Label();
             this.EntityFlagsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -55,6 +57,7 @@
             this.AssetTypeComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.HDTextureDistNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -91,6 +94,7 @@
             this.BaseArchetypeTabPage.Controls.Add(this.ArchetypeNameTextBox);
             this.BaseArchetypeTabPage.Controls.Add(this.ArchetypeFlagsTextBox);
             this.BaseArchetypeTabPage.Controls.Add(this.PhysicsDictionaryTextBox);
+            this.BaseArchetypeTabPage.Controls.Add(this.DrawableDictionaryTextBox);
             this.BaseArchetypeTabPage.Controls.Add(this.ClipDictionaryTextBox);
             this.BaseArchetypeTabPage.Controls.Add(this.AssetNameTextBox);
             this.BaseArchetypeTabPage.Controls.Add(this.TextureDictTextBox);
@@ -98,6 +102,7 @@
             this.BaseArchetypeTabPage.Controls.Add(this.label11);
             this.BaseArchetypeTabPage.Controls.Add(this.label5);
             this.BaseArchetypeTabPage.Controls.Add(this.PhysicsDictHashLabel);
+            this.BaseArchetypeTabPage.Controls.Add(this.DrawableDictHashLabel);
             this.BaseArchetypeTabPage.Controls.Add(this.TextureDictHashLabel);
             this.BaseArchetypeTabPage.Controls.Add(this.EntityFlagsCheckedListBox);
             this.BaseArchetypeTabPage.Controls.Add(this.label14);
@@ -107,6 +112,7 @@
             this.BaseArchetypeTabPage.Controls.Add(this.AssetTypeComboBox);
             this.BaseArchetypeTabPage.Controls.Add(this.label8);
             this.BaseArchetypeTabPage.Controls.Add(this.label7);
+            this.BaseArchetypeTabPage.Controls.Add(this.label17);
             this.BaseArchetypeTabPage.Controls.Add(this.label6);
             this.BaseArchetypeTabPage.Controls.Add(this.label4);
             this.BaseArchetypeTabPage.Controls.Add(this.HDTextureDistNumericUpDown);
@@ -129,8 +135,8 @@
             this.ArchetypeDeleteButton.Location = new System.Drawing.Point(165, 675);
             this.ArchetypeDeleteButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ArchetypeDeleteButton.Name = "ArchetypeDeleteButton";
-            this.ArchetypeDeleteButton.Size = new System.Drawing.Size(189, 35);
-            this.ArchetypeDeleteButton.TabIndex = 79;
+            this.ArchetypeDeleteButton.Size = new System.Drawing.Size(126, 23);
+            this.ArchetypeDeleteButton.TabIndex = 58;
             this.ArchetypeDeleteButton.Text = "Delete Archetype";
             this.ArchetypeDeleteButton.UseVisualStyleBackColor = true;
             this.ArchetypeDeleteButton.Click += new System.EventHandler(this.DeleteArchetypeButton_Click);
@@ -142,8 +148,8 @@
             this.label13.Location = new System.Drawing.Point(12, 623);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(85, 20);
-            this.label13.TabIndex = 78;
+            this.label13.Size = new System.Drawing.Size(57, 13);
+            this.label13.TabIndex = 56;
             this.label13.Text = "BSRadius:";
             // 
             // BSRadiusTextBox
@@ -153,8 +159,8 @@
             this.BSRadiusTextBox.Location = new System.Drawing.Point(106, 618);
             this.BSRadiusTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BSRadiusTextBox.Name = "BSRadiusTextBox";
-            this.BSRadiusTextBox.Size = new System.Drawing.Size(826, 26);
-            this.BSRadiusTextBox.TabIndex = 77;
+            this.BSRadiusTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BSRadiusTextBox.TabIndex = 57;
             this.BSRadiusTextBox.TextChanged += new System.EventHandler(this.BSRadiusTextBox_TextChanged);
             // 
             // BSCenterTextBox
@@ -164,8 +170,8 @@
             this.BSCenterTextBox.Location = new System.Drawing.Point(106, 578);
             this.BSCenterTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BSCenterTextBox.Name = "BSCenterTextBox";
-            this.BSCenterTextBox.Size = new System.Drawing.Size(826, 26);
-            this.BSCenterTextBox.TabIndex = 75;
+            this.BSCenterTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BSCenterTextBox.TabIndex = 55;
             this.BSCenterTextBox.TextChanged += new System.EventHandler(this.BSCenterTextBox_TextChanged);
             // 
             // BBMaxTextBox
@@ -175,8 +181,8 @@
             this.BBMaxTextBox.Location = new System.Drawing.Point(106, 538);
             this.BBMaxTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BBMaxTextBox.Name = "BBMaxTextBox";
-            this.BBMaxTextBox.Size = new System.Drawing.Size(826, 26);
-            this.BBMaxTextBox.TabIndex = 73;
+            this.BBMaxTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BBMaxTextBox.TabIndex = 53;
             this.BBMaxTextBox.TextChanged += new System.EventHandler(this.BBMaxTextBox_TextChanged);
             // 
             // BBMinTextBox
@@ -186,73 +192,77 @@
             this.BBMinTextBox.Location = new System.Drawing.Point(106, 498);
             this.BBMinTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BBMinTextBox.Name = "BBMinTextBox";
-            this.BBMinTextBox.Size = new System.Drawing.Size(826, 26);
-            this.BBMinTextBox.TabIndex = 71;
+            this.BBMinTextBox.Size = new System.Drawing.Size(552, 20);
+            this.BBMinTextBox.TabIndex = 51;
             this.BBMinTextBox.TextChanged += new System.EventHandler(this.BBMinTextBox_TextChanged);
             // 
             // ArchetypeNameTextBox
             // 
             this.ArchetypeNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArchetypeNameTextBox.Location = new System.Drawing.Point(165, 14);
-            this.ArchetypeNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ArchetypeNameTextBox.Location = new System.Drawing.Point(113, 9);
             this.ArchetypeNameTextBox.Name = "ArchetypeNameTextBox";
-            this.ArchetypeNameTextBox.Size = new System.Drawing.Size(368, 26);
-            this.ArchetypeNameTextBox.TabIndex = 70;
+            this.ArchetypeNameTextBox.Size = new System.Drawing.Size(247, 20);
+            this.ArchetypeNameTextBox.TabIndex = 11;
             this.ArchetypeNameTextBox.TextChanged += new System.EventHandler(this.ArchetypeNameTextBox_TextChanged);
             // 
             // ArchetypeFlagsTextBox
             // 
             this.ArchetypeFlagsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArchetypeFlagsTextBox.Location = new System.Drawing.Point(714, 18);
-            this.ArchetypeFlagsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ArchetypeFlagsTextBox.Location = new System.Drawing.Point(422, 12);
             this.ArchetypeFlagsTextBox.Name = "ArchetypeFlagsTextBox";
-            this.ArchetypeFlagsTextBox.Size = new System.Drawing.Size(218, 26);
-            this.ArchetypeFlagsTextBox.TabIndex = 66;
+            this.ArchetypeFlagsTextBox.Size = new System.Drawing.Size(201, 20);
+            this.ArchetypeFlagsTextBox.TabIndex = 34;
             this.ArchetypeFlagsTextBox.TextChanged += new System.EventHandler(this.ArchetypeFlagsTextBox_TextChanged);
             // 
             // PhysicsDictionaryTextBox
             // 
             this.PhysicsDictionaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PhysicsDictionaryTextBox.Location = new System.Drawing.Point(165, 294);
-            this.PhysicsDictionaryTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PhysicsDictionaryTextBox.Location = new System.Drawing.Point(113, 191);
             this.PhysicsDictionaryTextBox.Name = "PhysicsDictionaryTextBox";
-            this.PhysicsDictionaryTextBox.Size = new System.Drawing.Size(307, 26);
-            this.PhysicsDictionaryTextBox.TabIndex = 60;
+            this.PhysicsDictionaryTextBox.Size = new System.Drawing.Size(180, 20);
+            this.PhysicsDictionaryTextBox.TabIndex = 27;
             this.PhysicsDictionaryTextBox.TextChanged += new System.EventHandler(this.PhysicsDictionaryTextBox_TextChanged);
+            // 
+            // DrawableDictionaryTextBox
+            // 
+            this.DrawableDictionaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DrawableDictionaryTextBox.Location = new System.Drawing.Point(113, 165);
+            this.DrawableDictionaryTextBox.Name = "DrawableDictionaryTextBox";
+            this.DrawableDictionaryTextBox.Size = new System.Drawing.Size(180, 20);
+            this.DrawableDictionaryTextBox.TabIndex = 24;
+            this.DrawableDictionaryTextBox.TextChanged += new System.EventHandler(this.DrawableDictionaryTextBox_TextChanged);
             // 
             // ClipDictionaryTextBox
             // 
             this.ClipDictionaryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ClipDictionaryTextBox.Location = new System.Drawing.Point(165, 254);
-            this.ClipDictionaryTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ClipDictionaryTextBox.Location = new System.Drawing.Point(113, 217);
             this.ClipDictionaryTextBox.Name = "ClipDictionaryTextBox";
-            this.ClipDictionaryTextBox.Size = new System.Drawing.Size(368, 26);
-            this.ClipDictionaryTextBox.TabIndex = 58;
+            this.ClipDictionaryTextBox.Size = new System.Drawing.Size(247, 20);
+            this.ClipDictionaryTextBox.TabIndex = 30;
             this.ClipDictionaryTextBox.TextChanged += new System.EventHandler(this.ClipDictionaryTextBox_TextChanged);
             // 
             // AssetNameTextBox
             // 
             this.AssetNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AssetNameTextBox.Location = new System.Drawing.Point(165, 54);
-            this.AssetNameTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AssetNameTextBox.Location = new System.Drawing.Point(113, 35);
             this.AssetNameTextBox.Name = "AssetNameTextBox";
-            this.AssetNameTextBox.Size = new System.Drawing.Size(368, 26);
-            this.AssetNameTextBox.TabIndex = 56;
+            this.AssetNameTextBox.Size = new System.Drawing.Size(247, 20);
+            this.AssetNameTextBox.TabIndex = 13;
             this.AssetNameTextBox.TextChanged += new System.EventHandler(this.AssetNameTextBox_TextChanged);
             // 
             // TextureDictTextBox
             // 
             this.TextureDictTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextureDictTextBox.Location = new System.Drawing.Point(165, 214);
-            this.TextureDictTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TextureDictTextBox.Location = new System.Drawing.Point(113, 139);
             this.TextureDictTextBox.Name = "TextureDictTextBox";
-            this.TextureDictTextBox.Size = new System.Drawing.Size(307, 26);
-            this.TextureDictTextBox.TabIndex = 54;
+            this.TextureDictTextBox.Size = new System.Drawing.Size(180, 20);
+            this.TextureDictTextBox.TabIndex = 21;
             this.TextureDictTextBox.TextChanged += new System.EventHandler(this.TextureDictTextBox_TextChanged);
             // 
             // label12
@@ -262,8 +272,8 @@
             this.label12.Location = new System.Drawing.Point(12, 583);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(83, 20);
-            this.label12.TabIndex = 76;
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 54;
             this.label12.Text = "BSCenter:";
             // 
             // label11
@@ -273,8 +283,8 @@
             this.label11.Location = new System.Drawing.Point(28, 543);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 20);
-            this.label11.TabIndex = 74;
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 52;
             this.label11.Text = "BBMax:";
             // 
             // label5
@@ -284,31 +294,39 @@
             this.label5.Location = new System.Drawing.Point(36, 503);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 20);
-            this.label5.TabIndex = 72;
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 50;
             this.label5.Text = "BBMin:";
             // 
             // PhysicsDictHashLabel
             // 
             this.PhysicsDictHashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PhysicsDictHashLabel.AutoSize = true;
-            this.PhysicsDictHashLabel.Location = new System.Drawing.Point(483, 298);
-            this.PhysicsDictHashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.PhysicsDictHashLabel.Location = new System.Drawing.Point(295, 194);
             this.PhysicsDictHashLabel.Name = "PhysicsDictHashLabel";
-            this.PhysicsDictHashLabel.Size = new System.Drawing.Size(51, 20);
-            this.PhysicsDictHashLabel.TabIndex = 69;
-            this.PhysicsDictHashLabel.Text = "Hash:";
+            this.PhysicsDictHashLabel.Size = new System.Drawing.Size(14, 13);
+            this.PhysicsDictHashLabel.TabIndex = 28;
+            this.PhysicsDictHashLabel.Text = "#";
+            // 
+            // DrawableDictHashLabel
+            // 
+            this.DrawableDictHashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DrawableDictHashLabel.AutoSize = true;
+            this.DrawableDictHashLabel.Location = new System.Drawing.Point(295, 168);
+            this.DrawableDictHashLabel.Name = "DrawableDictHashLabel";
+            this.DrawableDictHashLabel.Size = new System.Drawing.Size(14, 13);
+            this.DrawableDictHashLabel.TabIndex = 25;
+            this.DrawableDictHashLabel.Text = "#";
             // 
             // TextureDictHashLabel
             // 
             this.TextureDictHashLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TextureDictHashLabel.AutoSize = true;
-            this.TextureDictHashLabel.Location = new System.Drawing.Point(483, 218);
-            this.TextureDictHashLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TextureDictHashLabel.Location = new System.Drawing.Point(295, 142);
             this.TextureDictHashLabel.Name = "TextureDictHashLabel";
-            this.TextureDictHashLabel.Size = new System.Drawing.Size(51, 20);
-            this.TextureDictHashLabel.TabIndex = 68;
-            this.TextureDictHashLabel.Text = "Hash:";
+            this.TextureDictHashLabel.Size = new System.Drawing.Size(14, 13);
+            this.TextureDictHashLabel.TabIndex = 22;
+            this.TextureDictHashLabel.Text = "#";
             // 
             // EntityFlagsCheckedListBox
             // 
@@ -317,90 +335,85 @@
             this.EntityFlagsCheckedListBox.CheckOnClick = true;
             this.EntityFlagsCheckedListBox.FormattingEnabled = true;
             this.EntityFlagsCheckedListBox.Items.AddRange(new object[] {
-            "1 - Unk01",
-            "2 - Unk02",
-            "4 - Unk03",
-            "8 - Unk04",
-            "16 - Unk05",
+            "1 - Wet Road Reflection",
+            "2 - Dont Fade",
+            "4 - Draw Last",
+            "8 - Climbable By AI",
+            "16 - Suppress HD TXDs",
             "32 - Static",
             "64 - Disable alpha sorting",
-            "128 - Instance",
-            "256 - Unk09",
-            "512 - Bone anims (YCD)",
+            "128 - Tough For Bullets",
+            "256 - Is Generic",
+            "512 - Has Anim (YCD)",
             "1024 - UV anims (YCD)",
-            "2048 - Unk12",
-            "4096 - Unk13",
-            "8192 - Object won\'t cast shadow",
-            "16384 - Unk15",
-            "32768 - Unk16",
+            "2048 - Shadow Only",
+            "4096 - Damage Model",
+            "8192 - Dont Cast Shadows",
+            "16384 - Cast Texture Shadows",
+            "32768 - Dont Collide With Flyer",
             "65536 - Double-sided rendering",
             "131072 - Dynamic",
-            "262144 - Unk19",
-            "524288 - Dynamic anims (YCD)",
-            "1048576 - Unk21",
-            "2097152 - Unk22",
-            "4194304 - Unk23",
-            "8388608 - Unk24",
-            "16777216 - Unk25",
-            "33554432 - Unk26",
-            "67108864 - Enables special atribute for door archetypes",
-            "134217728 - Unk28",
-            "268435456 - Disable red vertex channel",
-            "536870912 - Disable green vertex channel",
-            "1073741824 - Disable blue vertex channel",
-            "2147483648 - Disable alpha vertex channel"});
-            this.EntityFlagsCheckedListBox.Location = new System.Drawing.Point(662, 58);
-            this.EntityFlagsCheckedListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            "262144 - Override Physics Bounds",
+            "524288 - Auto Start Anim",
+            "1048576 - Pre Reflected Water Proxy",
+            "2097152 - Proxy For Water Reflections",
+            "4194304 - No AI Cover",
+            "8388608 - No Player Cover",
+            "16777216 - Is Ladder Deprecated",
+            "33554432 - Has Cloth",
+            "67108864 - Enable Door Physics",
+            "134217728 - Is Fixed For Navigation",
+            "268435456 -  Dont Avoid By Peds",
+            "536870912 - Use Ambient Scale",
+            "1073741824 - Is Debug",
+            "2147483648 - Has Alpha Shadow"});
+            this.EntityFlagsCheckedListBox.Location = new System.Drawing.Point(384, 38);
             this.EntityFlagsCheckedListBox.Name = "EntityFlagsCheckedListBox";
-            this.EntityFlagsCheckedListBox.Size = new System.Drawing.Size(271, 418);
-            this.EntityFlagsCheckedListBox.TabIndex = 67;
+            this.EntityFlagsCheckedListBox.Size = new System.Drawing.Size(239, 274);
+            this.EntityFlagsCheckedListBox.TabIndex = 35;
             this.EntityFlagsCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ArchetypeFlagsCheckedListBox_ItemCheck);
             // 
             // label14
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(628, 23);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Location = new System.Drawing.Point(381, 15);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(52, 20);
-            this.label14.TabIndex = 65;
+            this.label14.Size = new System.Drawing.Size(35, 13);
+            this.label14.TabIndex = 33;
             this.label14.Text = "Flags:";
             // 
             // SpecialAttributeNumericUpDown
             // 
             this.SpecialAttributeNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SpecialAttributeNumericUpDown.Location = new System.Drawing.Point(165, 174);
-            this.SpecialAttributeNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.SpecialAttributeNumericUpDown.Location = new System.Drawing.Point(113, 113);
             this.SpecialAttributeNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.SpecialAttributeNumericUpDown.Name = "SpecialAttributeNumericUpDown";
-            this.SpecialAttributeNumericUpDown.Size = new System.Drawing.Size(370, 26);
-            this.SpecialAttributeNumericUpDown.TabIndex = 64;
+            this.SpecialAttributeNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.SpecialAttributeNumericUpDown.TabIndex = 19;
             this.SpecialAttributeNumericUpDown.ValueChanged += new System.EventHandler(this.SpecialAttributeNumericUpDown_ValueChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(26, 177);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(20, 115);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(130, 20);
-            this.label10.TabIndex = 63;
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 18;
             this.label10.Text = "Special Attribute:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(62, 338);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(44, 246);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(92, 20);
-            this.label9.TabIndex = 62;
+            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.TabIndex = 31;
             this.label9.Text = "Asset Type:";
             // 
             // AssetTypeComboBox
@@ -409,50 +422,54 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AssetTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AssetTypeComboBox.FormattingEnabled = true;
-            this.AssetTypeComboBox.Location = new System.Drawing.Point(165, 334);
-            this.AssetTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.AssetTypeComboBox.Location = new System.Drawing.Point(113, 243);
             this.AssetTypeComboBox.Name = "AssetTypeComboBox";
-            this.AssetTypeComboBox.Size = new System.Drawing.Size(368, 28);
-            this.AssetTypeComboBox.TabIndex = 61;
+            this.AssetTypeComboBox.Size = new System.Drawing.Size(247, 21);
+            this.AssetTypeComboBox.TabIndex = 32;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 298);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(11, 194);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(140, 20);
-            this.label8.TabIndex = 59;
+            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.TabIndex = 26;
             this.label8.Text = "Physics Dictionary:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(40, 258);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(30, 220);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 20);
-            this.label7.TabIndex = 57;
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 29;
             this.label7.Text = "Clip Dictionary:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(2, 168);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(105, 13);
+            this.label17.TabIndex = 23;
+            this.label17.Text = "Drawable Dictionary:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(56, 58);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(40, 38);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 20);
-            this.label6.TabIndex = 55;
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 12;
             this.label6.Text = "Asset Name:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 218);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(11, 142);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 20);
-            this.label4.TabIndex = 53;
+            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.TabIndex = 20;
             this.label4.Text = "Texture Dictionary:";
             // 
             // HDTextureDistNumericUpDown
@@ -460,26 +477,24 @@
             this.HDTextureDistNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.HDTextureDistNumericUpDown.DecimalPlaces = 8;
-            this.HDTextureDistNumericUpDown.Location = new System.Drawing.Point(165, 134);
-            this.HDTextureDistNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.HDTextureDistNumericUpDown.Location = new System.Drawing.Point(113, 87);
             this.HDTextureDistNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.HDTextureDistNumericUpDown.Name = "HDTextureDistNumericUpDown";
-            this.HDTextureDistNumericUpDown.Size = new System.Drawing.Size(370, 26);
-            this.HDTextureDistNumericUpDown.TabIndex = 52;
+            this.HDTextureDistNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.HDTextureDistNumericUpDown.TabIndex = 17;
             this.HDTextureDistNumericUpDown.ValueChanged += new System.EventHandler(this.HDTextureDistNumericUpDown_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 137);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(21, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 20);
-            this.label3.TabIndex = 51;
+            this.label3.Size = new System.Drawing.Size(86, 13);
+            this.label3.TabIndex = 16;
             this.label3.Text = "HD Texture Dist:";
             // 
             // LodDistNumericUpDown
@@ -487,36 +502,33 @@
             this.LodDistNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LodDistNumericUpDown.DecimalPlaces = 8;
-            this.LodDistNumericUpDown.Location = new System.Drawing.Point(165, 94);
-            this.LodDistNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LodDistNumericUpDown.Location = new System.Drawing.Point(113, 61);
             this.LodDistNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
             0,
             0});
             this.LodDistNumericUpDown.Name = "LodDistNumericUpDown";
-            this.LodDistNumericUpDown.Size = new System.Drawing.Size(370, 26);
-            this.LodDistNumericUpDown.TabIndex = 50;
+            this.LodDistNumericUpDown.Size = new System.Drawing.Size(247, 20);
+            this.LodDistNumericUpDown.TabIndex = 15;
             this.LodDistNumericUpDown.ValueChanged += new System.EventHandler(this.LodDistNumericUpDown_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(82, 97);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(58, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
-            this.label2.TabIndex = 49;
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 14;
             this.label2.Text = "Lod Dist:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(99, 18);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(69, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
-            this.label1.TabIndex = 48;
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 10;
             this.label1.Text = "Name:";
             // 
             // TabControl
@@ -529,8 +541,8 @@
             this.TabControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(958, 777);
-            this.TabControl.TabIndex = 48;
+            this.TabControl.Size = new System.Drawing.Size(639, 505);
+            this.TabControl.TabIndex = 0;
             // 
             // MloArchetypeTabPage
             // 
@@ -546,10 +558,9 @@
             // 
             // MloUpdatePortalCountsButton
             // 
-            this.MloUpdatePortalCountsButton.Location = new System.Drawing.Point(74, 54);
-            this.MloUpdatePortalCountsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MloUpdatePortalCountsButton.Location = new System.Drawing.Point(49, 35);
             this.MloUpdatePortalCountsButton.Name = "MloUpdatePortalCountsButton";
-            this.MloUpdatePortalCountsButton.Size = new System.Drawing.Size(230, 35);
+            this.MloUpdatePortalCountsButton.Size = new System.Drawing.Size(153, 23);
             this.MloUpdatePortalCountsButton.TabIndex = 0;
             this.MloUpdatePortalCountsButton.Text = "Update Portal Counts";
             this.MloUpdatePortalCountsButton.UseVisualStyleBackColor = true;
@@ -570,10 +581,9 @@
             // 
             // TimeFlagsTextBox
             // 
-            this.TimeFlagsTextBox.Location = new System.Drawing.Point(108, 9);
-            this.TimeFlagsTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TimeFlagsTextBox.Location = new System.Drawing.Point(82, 6);
             this.TimeFlagsTextBox.Name = "TimeFlagsTextBox";
-            this.TimeFlagsTextBox.Size = new System.Drawing.Size(218, 26);
+            this.TimeFlagsTextBox.Size = new System.Drawing.Size(190, 20);
             this.TimeFlagsTextBox.TabIndex = 69;
             this.TimeFlagsTextBox.TextChanged += new System.EventHandler(this.TimeFlagsTextBox_TextChanged);
             // 
@@ -608,7 +618,7 @@
             "2097152 - 21:00 - 22:00",
             "4194304 - 22:00 - 23:00",
             "8388608 - 23:00 - 00:00",
-            "16777216 - Unk25",
+            "16777216 - Allow Vanish Whilst Viewed",
             "33554432 - Unk26",
             "67108864 - Unk27",
             "134217728 - Unk28",
@@ -619,15 +629,14 @@
             this.TimeFlagsCheckedListBox.Location = new System.Drawing.Point(27, 49);
             this.TimeFlagsCheckedListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TimeFlagsCheckedListBox.Name = "TimeFlagsCheckedListBox";
-            this.TimeFlagsCheckedListBox.Size = new System.Drawing.Size(300, 648);
+            this.TimeFlagsCheckedListBox.Size = new System.Drawing.Size(254, 424);
             this.TimeFlagsCheckedListBox.TabIndex = 70;
             this.TimeFlagsCheckedListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.TimeFlagsCheckedListBox_ItemCheck);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 14);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(15, 9);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(90, 20);
             this.label15.TabIndex = 68;
@@ -681,12 +690,14 @@
         private System.Windows.Forms.TextBox ArchetypeFlagsTextBox;
         private System.Windows.Forms.TextBox PhysicsDictionaryTextBox;
         private System.Windows.Forms.TextBox ClipDictionaryTextBox;
+        private System.Windows.Forms.TextBox DrawableDictionaryTextBox;
         private System.Windows.Forms.TextBox AssetNameTextBox;
         private System.Windows.Forms.TextBox TextureDictTextBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label PhysicsDictHashLabel;
+        private System.Windows.Forms.Label DrawableDictHashLabel;
         private System.Windows.Forms.Label TextureDictHashLabel;
         private System.Windows.Forms.CheckedListBox EntityFlagsCheckedListBox;
         private System.Windows.Forms.Label label14;
@@ -696,6 +707,7 @@
         private System.Windows.Forms.ComboBox AssetTypeComboBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown HDTextureDistNumericUpDown;

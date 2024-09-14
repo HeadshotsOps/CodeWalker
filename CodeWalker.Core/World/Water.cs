@@ -29,38 +29,30 @@ namespace CodeWalker.World
         {
             GameFileCache = gameFileCache;
 
-            var rpfman = gameFileCache.RpfMan;
-            string filename = FilenameVanilla;
-            switch (area)
+
+            WaterQuads.Clear();
+            CalmingQuads.Clear();
+            WaveQuads.Clear();
+
+            LoadWaterXml("common.rpf\\data\\levels\\gta5\\water.xml");
+            
+            if (GameFileCache.EnableDlc)
             {
-                case WaterFileArea.HEISTISLAND:
-                    filename = FilenameHeistIsland;
-                    break;
-                case WaterFileArea.CUSTOM:
-                    filename = customFile;
-                    FilenameCustom = filename;
-                    break;
-                default:
-                    filename = FilenameVanilla;
-                    break;
+                LoadWaterXml("update\\update.rpf\\common\\data\\levels\\gta5\\water_heistisland.xml");
             }
 
 
-            XmlDocument waterxml;
-            if (area != WaterFileArea.CUSTOM)
-            {
-                waterxml = rpfman.GetFileXml(filename);
-            }
-            else
-            {
-                waterxml = new XmlDocument();
-                waterxml.Load(filename);
-            }
+            Inited = true;
+        }
+
+        private void LoadWaterXml(string filename)
+        {
+            var rpfman = GameFileCache.RpfMan;
+            XmlDocument waterxml = rpfman.GetFileXml(filename);
 
             XmlElement waterdata = waterxml.DocumentElement;
 
             XmlNodeList waterquads = waterdata.SelectNodes("WaterQuads/Item");
-            WaterQuads.Clear();
             for (int i = 0; i < waterquads.Count; i++)
             {
                 var waterquad = new WaterQuad();
@@ -69,7 +61,6 @@ namespace CodeWalker.World
             }
 
             XmlNodeList calmingquads = waterdata.SelectNodes("CalmingQuads/Item");
-            CalmingQuads.Clear();
             for (int i = 0; i < calmingquads.Count; i++)
             {
                 var calmingquad = new WaterCalmingQuad();
@@ -78,7 +69,6 @@ namespace CodeWalker.World
             }
 
             XmlNodeList wavequads = waterdata.SelectNodes("WaveQuads/Item");
-            WaveQuads.Clear();
             for (int i = 0; i < wavequads.Count; i++)
             {
                 var wavequad = new WaterWaveQuad();
@@ -86,7 +76,6 @@ namespace CodeWalker.World
                 WaveQuads.Add(wavequad);
             }
 
-            Inited = true;
         }
 
 
