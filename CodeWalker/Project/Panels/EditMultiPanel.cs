@@ -147,22 +147,23 @@ namespace CodeWalker.Project.Panels
 
         private void roomIdUpDown_ValueChanged(object sender, EventArgs e)
         {
-            bool hasMlo = true;
-            int newRoomIdx = Convert.ToInt32(roomIdUpDown.Value);
-            foreach (MapSelection ms in Items)
-            {
-                YmapEntityDef mloInstanceEntity = ms.EntityDef.MloParent;
-                if (mloInstanceEntity is null)
-                {
-                    hasMlo = false;
-                    MessageBox.Show("Not all entities have an MLO parent!");
-                }
-                MloArchetype mloArch = mloInstanceEntity.Archetype as MloArchetype;
+            MessageBox.Show("Deprecated mod by headshots"); //broke on merging on 14/09
+            //bool hasMlo = true;
+            //int newRoomIdx = Convert.ToInt32(roomIdUpDown.Value);
+            //foreach (MapSelection ms in Items)
+            //{
+            //    YmapEntityDef mloInstanceEntity = ms.EntityDef.MloParent;
+            //    if (mloInstanceEntity is null)
+            //    {
+            //        hasMlo = false;
+            //        MessageBox.Show("Not all entities have an MLO parent!");
+            //    }
+            //    MloArchetype mloArch = mloInstanceEntity.Archetype as MloArchetype;
 
-                MCEntityDef mcEnt = mloInstanceEntity.MloInstance.TryGetArchetypeEntity(mloInstanceEntity);
-                ProjectForm.DeleteMloEntity(ms.EntityDef);
-                ProjectForm.NewMloEntity(mloArch, newRoomIdx, ms.EntityDef.CEntityDef, false, true);
-            }
+            //    MCEntityDef mcEnt = mloInstanceEntity.MloInstance.TryGetArchetypeEntity(mloInstanceEntity);
+            //    ProjectForm.DeleteMloEntity(ms.EntityDef);
+            //    ProjectForm.NewMloEntity(mloArch, newRoomIdx, ms.EntityDef.CEntityDef, false, true);
+            //}
         }
 
         class PropPlane

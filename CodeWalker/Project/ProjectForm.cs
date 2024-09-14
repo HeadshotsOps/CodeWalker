@@ -3731,58 +3731,6 @@ namespace CodeWalker.Project
 
             return outEnt;
         }
-        public YmapEntityDef NewMloEntity(MloArchetype mloArchetype, int roomIndex, CEntityDef entityDef, bool copyTransform = false, bool selectNew = true)
-        {
-            CurrentArchetype = mloArchetype;
-
-            var mloInstance = TryGetMloInstance(mloArchetype);
-            if (mloInstance == null)
-            {
-                MessageBox.Show("Unable to find MLO instance for this interior! Try adding an MLO instance ymap to the project.");
-                return null;
-            }
-
-            var createindex = mloArchetype.entities.Length;
-            var ment = new MCEntityDef(ref entityDef, mloArchetype);
-            var outEnt = mloInstance.CreateYmapEntity(mloInstance.Owner, ment, createindex);
-
-            try
-            {
-                if (WorldForm != null)
-                {
-                    lock (WorldForm.RenderSyncRoot) //don't try to do this while rendering...
-                    {
-                        mloArchetype.AddEntity(outEnt, roomIndex);
-                        mloInstance.AddEntity(outEnt);
-                        outEnt.SetArchetype(GameFileCache.GetArchetype(entityDef.archetypeName));
-                    }
-                }
-                else
-                {
-                    mloArchetype.AddEntity(outEnt, roomIndex);
-                    mloInstance.AddEntity(outEnt);
-                    outEnt.SetArchetype(GameFileCache.GetArchetype(entityDef.archetypeName));
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(this, e.Message, "Create MLO Entity Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-
-            ment = mloInstance.TryGetArchetypeEntity(outEnt);
-
-            if (selectNew)
-            {
-                LoadProjectTree();
-                ProjectExplorer?.TrySelectMloEntityTreeNode(ment);
-                CurrentEntity = outEnt;
-                CurrentMloEntity = ment;
-                CurrentYtypFile = CurrentEntity.MloParent?.Archetype?.Ytyp;
-            }
-
-            return outEnt;
-        }
         public MCMloRoomDef NewMloRoom(MCMloRoomDef copy = null)
         {
             var mlo = CurrentMloRoom?.OwnerMlo ?? CurrentMloPortal?.OwnerMlo ?? CurrentMloEntitySet?.OwnerMlo ?? (CurrentEntity?.MloParent.Archetype as MloArchetype) ?? (CurrentArchetype as MloArchetype);
@@ -10349,23 +10297,6 @@ namespace CodeWalker.Project
             YmapFile ymap = CurrentYmapFile;
 
         }
-
-        private AudioPlacement copiedZone;
-        private void copyAmbientZoneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            copiedZone = CurrentAudioZone;
-        }
-
-
-        private void pasteAmbientZoneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            CurrentAudioFile.AddRelData(copiedZone.AudioZone);
-            LoadProjectTree();
-
-            ShowEditAudioZonePanel(false);
-        }
-
-
         #endregion
 
         private void reloadCurrentToolStripMenuItem_Click(object sender, EventArgs e)

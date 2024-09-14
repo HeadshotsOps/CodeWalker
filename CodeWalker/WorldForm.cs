@@ -70,7 +70,7 @@ namespace CodeWalker
         bool renderworld = false;
         int startupviewmode = 0; //0=world, 1=ymap, 2=model
         string modelname = "dt1_tc_dufo_core";//"dt1_11_fount_decal";//"v_22_overlays";//
-        string[] ymaplist;
+        public string[] ymaplist;
 
         Vector3 prevworldpos = FloatUtil.ParseVector3String(Settings.Default.StartPosition);
 
@@ -4235,7 +4235,7 @@ namespace CodeWalker
             {
 #endif
                 UpdateStatus("Loading water...");
-                water.Init(gameFileCache, UpdateStatus);
+                //water.Init(gameFileCache, UpdateStatus);
 #if !DEBUG
             }
             catch (Exception ex)
@@ -8219,8 +8219,6 @@ namespace CodeWalker
                 WaterFileArea area = WorldHeistWaterheckBox.Checked ? WaterFileArea.HEISTISLAND : WaterFileArea.BASE;
                 water.Init(gameFileCache, UpdateStatus, area);
             }
-
-            SpaceNodeGridCell.IsCayoGrid = WorldHeistWaterheckBox.Checked;
 
         }
 

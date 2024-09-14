@@ -50,6 +50,10 @@ namespace CodeWalker.World
         private MetaHash CurrentWeather;
 
 
+        public void AddBoundsKey(SpaceBoundsKey key, BoundsStoreItem boundsStoreItem)
+        {
+            boundsdict[key] = boundsStoreItem;
+        }
         public void Init(GameFileCache gameFileCache, Action<string> updateStatus)
         {
             GameFileCache = gameFileCache;
@@ -1970,7 +1974,12 @@ namespace CodeWalker.World
             }
             RootNode.TrySplit(SplitThreshold);
         }
+        public void AddBoundItems(BoundsStoreItem item)
+        {
 
+            RootNode.Add(item);
+            RootNode.TrySplit(SplitThreshold);
+        }
         public List<BoundsStoreItem> GetItems(ref Vector3 min, ref Vector3 max, bool[] layers = null)
         {
             VisibleItems.Clear();

@@ -1502,20 +1502,6 @@
             this.AudioNewInteriorRoomMenu.Text = "New Interior Room";
             this.AudioNewInteriorRoomMenu.Click += new System.EventHandler(this.AudioNewInteriorRoomMenu_Click);
             // 
-            // copyAmbientZoneToolStripMenuItem
-            // 
-            this.copyAmbientZoneToolStripMenuItem.Name = "copyAmbientZoneToolStripMenuItem";
-            this.copyAmbientZoneToolStripMenuItem.Size = new System.Drawing.Size(326, 34);
-            this.copyAmbientZoneToolStripMenuItem.Text = "Copy Ambient Zone";
-            this.copyAmbientZoneToolStripMenuItem.Click += new System.EventHandler(this.copyAmbientZoneToolStripMenuItem_Click);
-            // 
-            // pasteAmbientZoneToolStripMenuItem
-            // 
-            this.pasteAmbientZoneToolStripMenuItem.Name = "pasteAmbientZoneToolStripMenuItem";
-            this.pasteAmbientZoneToolStripMenuItem.Size = new System.Drawing.Size(326, 34);
-            this.pasteAmbientZoneToolStripMenuItem.Text = "Paste Ambient Zone";
-            this.pasteAmbientZoneToolStripMenuItem.Click += new System.EventHandler(this.pasteAmbientZoneToolStripMenuItem_Click);
-            // 
             // toolStripSeparator24
             // 
             this.toolStripSeparator24.Name = "toolStripSeparator24";
