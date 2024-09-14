@@ -1568,6 +1568,10 @@ namespace CodeWalker.GameFiles
         }
         protected void RayIntersectPolygons(ref Ray ray, ref SpaceRayIntersectResult res, int startIndex, int endIndex)
         {
+            if (startIndex < 0)
+            {
+                throw new Exception($"{this.Parent.OwnerYbn.Name} has invalid poly references. Export Composites 32k polys max per BHV");
+            }
             var box = new BoundingBox();
             var tsph = new BoundingSphere();
             var rayt = new Ray();

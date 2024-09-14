@@ -54,6 +54,8 @@
             this.FileSaveItemMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FileSaveItemAsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.FileSaveItemAllMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importXmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EditUndoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.EditRedoMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +91,8 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.YmapAddToProjectMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YmapRemoveFromProjectMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadCurrentToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportDrawablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.YtypNameMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
@@ -218,7 +222,7 @@
             this.ToolbarSaveAllButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.reloadCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportVisibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.MainToolbar.SuspendLayout();
             this.SuspendLayout();
@@ -266,7 +270,8 @@
             this.FileSaveItemMenu,
             this.FileSaveItemAsMenu,
             this.FileSaveItemAllMenu,
-            this.reloadCurrentToolStripMenuItem});
+            this.reloadCurrentToolStripMenuItem,
+            this.importXmlToolStripMenuItem});
             this.FileMenu.Name = "FileMenu";
             this.FileMenu.Size = new System.Drawing.Size(54, 29);
             this.FileMenu.Text = "File";
@@ -285,7 +290,7 @@
             this.FileNewScenarioMenu,
             this.FileNewAudioDatMenu});
             this.FileNewMenu.Name = "FileNewMenu";
-            this.FileNewMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileNewMenu.Size = new System.Drawing.Size(247, 34);
             this.FileNewMenu.Text = "New";
             // 
             // FileNewProjectMenu
@@ -359,47 +364,47 @@
             // FileOpenProjectMenu
             // 
             this.FileOpenProjectMenu.Name = "FileOpenProjectMenu";
-            this.FileOpenProjectMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileOpenProjectMenu.Size = new System.Drawing.Size(247, 34);
             this.FileOpenProjectMenu.Text = "Open Project...";
             this.FileOpenProjectMenu.Click += new System.EventHandler(this.FileOpenProjectMenu_Click);
             // 
             // FileOpenFilesMenu
             // 
             this.FileOpenFilesMenu.Name = "FileOpenFilesMenu";
-            this.FileOpenFilesMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileOpenFilesMenu.Size = new System.Drawing.Size(247, 34);
             this.FileOpenFilesMenu.Text = "Open Files...";
             this.FileOpenFilesMenu.Click += new System.EventHandler(this.FileOpenFilesMenu_Click);
             // 
             // FileOpenFolderMenu
             // 
             this.FileOpenFolderMenu.Name = "FileOpenFolderMenu";
-            this.FileOpenFolderMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileOpenFolderMenu.Size = new System.Drawing.Size(247, 34);
             this.FileOpenFolderMenu.Text = "Open Folder...";
             this.FileOpenFolderMenu.Click += new System.EventHandler(this.FileOpenFolderMenu_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(244, 6);
             // 
             // FileCloseProjectMenu
             // 
             this.FileCloseProjectMenu.Enabled = false;
             this.FileCloseProjectMenu.Name = "FileCloseProjectMenu";
-            this.FileCloseProjectMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileCloseProjectMenu.Size = new System.Drawing.Size(247, 34);
             this.FileCloseProjectMenu.Text = "Close Project";
             this.FileCloseProjectMenu.Click += new System.EventHandler(this.FileCloseProjectMenu_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(244, 6);
             // 
             // FileSaveProjectMenu
             // 
             this.FileSaveProjectMenu.Enabled = false;
             this.FileSaveProjectMenu.Name = "FileSaveProjectMenu";
-            this.FileSaveProjectMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveProjectMenu.Size = new System.Drawing.Size(247, 34);
             this.FileSaveProjectMenu.Text = "Save Project";
             this.FileSaveProjectMenu.Click += new System.EventHandler(this.FileSaveProjectMenu_Click);
             // 
@@ -407,7 +412,7 @@
             // 
             this.FileSaveProjectAsMenu.Enabled = false;
             this.FileSaveProjectAsMenu.Name = "FileSaveProjectAsMenu";
-            this.FileSaveProjectAsMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveProjectAsMenu.Size = new System.Drawing.Size(247, 34);
             this.FileSaveProjectAsMenu.Text = "Save Project As...";
             this.FileSaveProjectAsMenu.Click += new System.EventHandler(this.FileSaveProjectAsMenu_Click);
             // 
@@ -415,7 +420,7 @@
             // 
             this.FileSaveItemMenu.Enabled = false;
             this.FileSaveItemMenu.Name = "FileSaveItemMenu";
-            this.FileSaveItemMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveItemMenu.Size = new System.Drawing.Size(247, 34);
             this.FileSaveItemMenu.Text = "Save Item";
             this.FileSaveItemMenu.Visible = false;
             this.FileSaveItemMenu.Click += new System.EventHandler(this.FileSaveItemMenu_Click);
@@ -424,7 +429,7 @@
             // 
             this.FileSaveItemAsMenu.Enabled = false;
             this.FileSaveItemAsMenu.Name = "FileSaveItemAsMenu";
-            this.FileSaveItemAsMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveItemAsMenu.Size = new System.Drawing.Size(247, 34);
             this.FileSaveItemAsMenu.Text = "Save Item As...";
             this.FileSaveItemAsMenu.Visible = false;
             this.FileSaveItemAsMenu.Click += new System.EventHandler(this.FileSaveItemAsMenu_Click);
@@ -432,9 +437,22 @@
             // FileSaveItemAllMenu
             // 
             this.FileSaveItemAllMenu.Name = "FileSaveItemAllMenu";
-            this.FileSaveItemAllMenu.Size = new System.Drawing.Size(270, 34);
+            this.FileSaveItemAllMenu.Size = new System.Drawing.Size(247, 34);
             this.FileSaveItemAllMenu.Text = "Save All";
             this.FileSaveItemAllMenu.Click += new System.EventHandler(this.FileSaveItemAllMenu_Click);
+            // 
+            // reloadCurrentToolStripMenuItem
+            // 
+            this.reloadCurrentToolStripMenuItem.Name = "reloadCurrentToolStripMenuItem";
+            this.reloadCurrentToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.reloadCurrentToolStripMenuItem.Text = "Reload Current";
+            this.reloadCurrentToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentToolStripMenuItem_Click);
+            // 
+            // importXmlToolStripMenuItem
+            // 
+            this.importXmlToolStripMenuItem.Name = "importXmlToolStripMenuItem";
+            this.importXmlToolStripMenuItem.Size = new System.Drawing.Size(247, 34);
+            this.importXmlToolStripMenuItem.Text = "Import xml";
             // 
             // EditMenu
             // 
@@ -651,7 +669,10 @@
             this.YmapNewGrassBatchMenu,
             this.toolStripSeparator12,
             this.YmapAddToProjectMenu,
-            this.YmapRemoveFromProjectMenu});
+            this.YmapRemoveFromProjectMenu,
+            this.reloadCurrentToolStripMenuItem1,
+            this.exportDrawablesToolStripMenuItem,
+            this.exportVisibleToolStripMenuItem});
             this.YmapMenu.Name = "YmapMenu";
             this.YmapMenu.Size = new System.Drawing.Size(73, 29);
             this.YmapMenu.Text = "Ymap";
@@ -713,6 +734,20 @@
             this.YmapRemoveFromProjectMenu.Size = new System.Drawing.Size(299, 34);
             this.YmapRemoveFromProjectMenu.Text = "Remove from Project";
             this.YmapRemoveFromProjectMenu.Click += new System.EventHandler(this.YmapRemoveFromProjectMenu_Click);
+            // 
+            // reloadCurrentToolStripMenuItem1
+            // 
+            this.reloadCurrentToolStripMenuItem1.Name = "reloadCurrentToolStripMenuItem1";
+            this.reloadCurrentToolStripMenuItem1.Size = new System.Drawing.Size(299, 34);
+            this.reloadCurrentToolStripMenuItem1.Text = "Reload Current";
+            this.reloadCurrentToolStripMenuItem1.Click += new System.EventHandler(this.reloadCurrentToolStripMenuItem1_Click);
+            // 
+            // exportDrawablesToolStripMenuItem
+            // 
+            this.exportDrawablesToolStripMenuItem.Name = "exportDrawablesToolStripMenuItem";
+            this.exportDrawablesToolStripMenuItem.Size = new System.Drawing.Size(299, 34);
+            this.exportDrawablesToolStripMenuItem.Text = "Export Drawables";
+            this.exportDrawablesToolStripMenuItem.Click += new System.EventHandler(this.exportDrawablesToolStripMenuItem_Click);
             // 
             // YtypMenu
             // 
@@ -1750,12 +1785,12 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 33);
             // 
-            // reloadCurrentToolStripMenuItem
+            // exportVisibleToolStripMenuItem
             // 
-            this.reloadCurrentToolStripMenuItem.Name = "reloadCurrentToolStripMenuItem";
-            this.reloadCurrentToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.reloadCurrentToolStripMenuItem.Text = "Reload Current";
-            this.reloadCurrentToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentToolStripMenuItem_Click);
+            this.exportVisibleToolStripMenuItem.Name = "exportVisibleToolStripMenuItem";
+            this.exportVisibleToolStripMenuItem.Size = new System.Drawing.Size(299, 34);
+            this.exportVisibleToolStripMenuItem.Text = "Export Visible";
+            this.exportVisibleToolStripMenuItem.Click += new System.EventHandler(this.exportVisibleToolStripMenuItem_Click);
             // 
             // ProjectForm
             // 
@@ -1973,5 +2008,9 @@
         private System.Windows.Forms.ToolStripMenuItem copyAmbientZoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteAmbientZoneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadCurrentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadCurrentToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exportDrawablesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importXmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportVisibleToolStripMenuItem;
     }
 }

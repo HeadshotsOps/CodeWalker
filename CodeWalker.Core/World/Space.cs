@@ -742,7 +742,7 @@ namespace CodeWalker.World
             ynd.CellX = x;
             ynd.CellY = y;
             var areaId = y * 32 + x;
-            ynd.AreaID = areaId;
+            ynd.AreaID = areaId + (ynd.IsCayoGrid ? 1024 : 0);
             ynd.Name = $"nodes{areaId}";
             NodeGrid.UpdateYnd(ynd);
         }
@@ -2107,7 +2107,27 @@ namespace CodeWalker.World
     public class SpaceNodeGrid
     {
         //node grid for V paths
-        public SpaceNodeGridCell[,] Cells { get; set; }
+        public bool IsCayoGrid { get; set; }
+        private SpaceNodeGridCell[,] vanillaCells;
+        private SpaceNodeGridCell[,] cayoCells;
+        public SpaceNodeGridCell[,] Cells
+        {
+            get
+            {
+                return !IsCayoGrid ? vanillaCells : cayoCells;
+            }
+            set
+            {
+                if (IsCayoGrid)
+                {
+                    cayoCells = value;
+                }
+                else
+                {
+                    vanillaCells = value;
+                }
+            }
+        }
         public float CellSize = 512.0f;
         public float CellSizeInv; //inverse of the cell size.
         public int CellCountX = 32;
@@ -2188,6 +2208,7 @@ namespace CodeWalker.World
         public int X;
         public int Y;
         public int ID;
+        public static bool IsCayoGrid { get; set; }
 
         public YndFile Ynd;
 

@@ -447,7 +447,7 @@ namespace CodeWalker.Rendering
                 int sr = 0;// D3D11CalcSubresource(0, 0, 1);
                 context.ResolveSubresource(Primary.TextureMS, sr, Primary.Texture, sr, Format.R32G32B32A32_Float);
             }
-
+            
             context.OutputMerger.SetRenderTargets((RenderTargetView)null);
 
             ProcessLuminance(context);
@@ -455,7 +455,9 @@ namespace CodeWalker.Rendering
 
             dxman.SetDefaultRenderTarget(context);
             context.OutputMerger.SetBlendState(BlendState, null, 0xFFFFFFFF);
+
             FinalPass(context);
+            return;
         }
 
 

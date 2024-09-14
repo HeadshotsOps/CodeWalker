@@ -89,6 +89,7 @@ namespace CodeWalker.Project.Panels
                 YndVehicleNodesUpDown.Value = Math.Min(nd?.NodesCountVehicle ?? 0, YndVehicleNodesUpDown.Maximum);
                 YndPedNodesUpDown.Maximum = nd?.NodesCount ?? 0;
                 YndPedNodesUpDown.Value = Math.Min(nd?.NodesCountPed ?? 0, YndPedNodesUpDown.Maximum);
+                YndIsCayoGridCheckBox.Checked = Ynd.IsCayoGrid;
                 populatingui = false;
             }
         }
@@ -160,6 +161,11 @@ namespace CodeWalker.Project.Panels
                 }
             }
             UpdateFormTitleYndChanged();
+        }
+
+        private void YndIsCayoGridCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Ynd.IsCayoGrid = YndIsCayoGridCheckBox.Checked;
         }
     }
 }

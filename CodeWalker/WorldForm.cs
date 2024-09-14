@@ -70,7 +70,7 @@ namespace CodeWalker
         bool renderworld = false;
         int startupviewmode = 0; //0=world, 1=ymap, 2=model
         string modelname = "dt1_tc_dufo_core";//"dt1_11_fount_decal";//"v_22_overlays";//
-        string[] ymaplist;
+        public string[] ymaplist;
         //-345.02, 6273.81, 55.74
         Vector3 prevworldpos = new Vector3(-345, 6273, 56); //also the start pos
 
@@ -130,7 +130,7 @@ namespace CodeWalker
         int collisionmeshrange = Settings.Default.CollisionMeshRange;
         bool[] collisionmeshlayers = { true, true, true };
 
-        Dictionary<MetaHash, YmapFile> renderworldVisibleYmapDict = new Dictionary<MetaHash, YmapFile>();
+        public Dictionary<MetaHash, YmapFile> renderworldVisibleYmapDict = new Dictionary<MetaHash, YmapFile>();
 
         bool worldymaptimefilter = true;
         bool worldymapweatherfilter = true;
@@ -8032,6 +8032,8 @@ namespace CodeWalker
                 WaterFileArea area = WorldHeistWaterheckBox.Checked ? WaterFileArea.HEISTISLAND : WaterFileArea.BASE;
                 water.Init(gameFileCache, UpdateStatus, area);
             }
+
+            SpaceNodeGridCell.IsCayoGrid = WorldHeistWaterheckBox.Checked;
 
         }
 

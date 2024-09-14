@@ -1,4 +1,5 @@
-﻿using CodeWalker.Utils;
+﻿using CodeWalker.Core.Mojito;
+using CodeWalker.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -570,9 +571,18 @@ namespace CodeWalker.GameFiles
                 var filepath = Path.Combine(ddsfolder, filename);
                 if (File.Exists(filepath))
                 {
+                    byte[] dds;
+                    if (Path.GetExtension(filepath) == ".png")
+                    {
+                        dds = PNGIO.GetDDSFile(filepath);
+                    }
+                    else
+                    {
+                        dds = File.ReadAllBytes(filepath);
+                    }
                     try
                     {
-                        var dds = File.ReadAllBytes(filepath);
+                        
                         var tex = DDSIO.GetTexture(dds);
                         if (tex != null)
                         {

@@ -3555,6 +3555,7 @@ namespace CodeWalker.Project
                 archetype._BaseArchetypeDef.bsRadius = ydr.Drawable.BoundingSphereRadius;
                 archetype._BaseArchetypeDef.hdTextureDist = 60.0f;
                 archetype._BaseArchetypeDef.lodDist = 60.0f;
+                archetype.Hash = hash;
                 if (ydr.Drawable.ShaderGroup.TextureDictionary != null) archetype._BaseArchetypeDef.textureDictionary = hash;
                 if (ydr.Drawable.Bound != null) archetype._BaseArchetypeDef.physicsDictionary = hash;
 
@@ -10112,6 +10113,13 @@ namespace CodeWalker.Project
                 MessageBox.Show($"Asset with path {filePath} requested for addition, could not be found");
                 return;
             }
+            //check if this drawable already exists (could happen when a new link between blender and cw was made after the model was imported for the first time
+            string assetName = Path.GetFileName(filePath);
+            if (CurrentProjectFile.YdrFiles.Any(y => y.Name == assetName))
+            {
+                RefreshSdkFile(assetName);
+                return;
+            }
             YdrFile newYdr = CurrentProjectFile.AddYdrFile(filePath);
             if (newYdr is null)
             {
@@ -10203,7 +10211,121 @@ namespace CodeWalker.Project
 
         private void reloadCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (CurrentYdrFile != null)
+            {
+                string file = CurrentYdrFile.FilePath;
+                RemoveYdrFromProject();
+                YdrFile ydr = CurrentProjectFile.AddYdrFile(file);
+                LoadYdrFromFile(ydr, file);
+            }
+            else if (CurrentEntity != null)
+            {
+                string modelName = CurrentEntity?.Archetype?.AssetName;
+                if (modelName is null)
+                {
+                    MessageBox.Show("Could not find archetype for given entity");
+                }
+                YdrFile entityYdr = CurrentProjectFile.YdrFiles.FirstOrDefault(y => y.Name == modelName + ".ydr");
+                if (entityYdr != null)
+                { 
+                    CurrentYdrFile = entityYdr;
+                    string file = CurrentYdrFile.FilePath;
+                    RemoveYdrFromProject();
+                    YdrFile ydr = CurrentProjectFile.AddYdrFile(file);
+                    LoadYdrFromFile(ydr, file);
+                }
+            }
+            else if (CurrentYmapFile != null)
+            {
+                RefreshSdkFile(CurrentYmapFile.Name);
+            }
+        }
 
+        private void reloadCurrentToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (CurrentYmapFile != null)
+            {
+                RefreshSdkFile(CurrentYmapFile.Name);
+            }
+        }
+
+        private void ExportYmapDrawables(YmapFile ymap)
+        {
+            string filePath = @"X:\sfg\unity_projects\GTA_Shaders_URP\Assets\Project - GTA Test Scene\Drawables\gta_scene\drawables";
+            
+
+
+
+
+            foreach (YmapEntityDef ent in ymap.AllEntities)
+            {
+                byte[] outData = null;
+                string fileName = "";
+                RpfFileEntry fe;
+                GameFileCache.YdrDict.TryGetValue(ent.CEntityDef.archetypeName, out fe);
+                if (fe is null) //Maybe an yft
+                {
+                    GameFileCache.YftDict.TryGetValue(ent.CEntityDef.archetypeName, out fe);
+
+                    if (fe is null)
+                    {
+                        continue;
+                    }
+                    YftFile yft = RpfFile.GetFile<YftFile>(fe);
+                    fileName = yft.Name;
+                    outData = yft.Save();
+                }
+                else
+                {
+                    YdrFile ydr = RpfFile.GetFile<YdrFile>(fe);
+                    fileName = ydr.Name;
+                    outData = ydr.Save();
+
+                }
+
+                MetaHash? txd = ent.Archetype?.TextureDict;
+
+                if (txd != null && txd != 0)
+                {
+                    GameFileCache.YtdDict.TryGetValue((MetaHash)txd, out fe);
+                    if (fe != null)
+                    {
+                        YtdFile ytd = RpfFile.GetFile<YtdFile>(fe);
+                        File.WriteAllBytes(Path.Combine(filePath, ytd.Name), ytd.Save());
+                    }
+                }
+
+                File.WriteAllBytes(Path.Combine(filePath, fileName), outData);
+            }
+        }
+
+
+        private void exportDrawablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportYmapDrawables(CurrentYmapFile);
+        }
+
+        private void exportVisibleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dict = WorldForm.renderworldVisibleYmapDict;
+            string filePathYmap = @"X:\sfg\unity_projects\GTA_Shaders_URP\Assets\gta_scene\ymap";
+
+            List<YmapFile> ymaps = dict.Values.ToList();
+
+            //foreach (var kvp in ymaps)
+            //{
+            //    YmapFile ymap = kvp;
+            //    ExportYmapDrawables(ymap);
+            //    File.WriteAllBytes(Path.Combine(filePathYmap, ymap.Name), ymap.Save());
+            //}
+
+            foreach (string ymapStr in WorldForm.ymaplist)
+            {
+                uint hash = JenkHash.GenHash(ymapStr);
+                YmapFile ymap = WorldForm.GameFileCache.GetYmap(hash);
+                ExportYmapDrawables(ymap);
+                File.WriteAllBytes(Path.Combine(filePathYmap, ymap.Name), ymap.Save());
+            }
         }
     }
 }

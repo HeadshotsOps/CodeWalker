@@ -1499,7 +1499,7 @@ namespace CodeWalker.GameFiles
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return data_items.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -1532,7 +1532,8 @@ namespace CodeWalker.GameFiles
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return data_items.GetEnumerator();
+            //throw new NotImplementedException();
         }
 
 

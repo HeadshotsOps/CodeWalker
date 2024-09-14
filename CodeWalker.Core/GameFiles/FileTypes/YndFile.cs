@@ -29,15 +29,22 @@ namespace CodeWalker.GameFiles
 
         public bool ShouldRecalculateIndices { get; set; }
 
+        public bool IsCayoGrid { get; set; }
         public int AreaID
         {
             get
             {
-                return CellY * 32 + CellX;
+                int gridOffset = IsCayoGrid ? 1024 : 0;
+                return (CellY * 32 + CellX) + gridOffset;
             }
             set
             {
-                CellX = value % 32;
+                int absoluteAreaID = value;
+                IsCayoGrid = absoluteAreaID >= 1024;
+
+                int gridAreaID = absoluteAreaID - (IsCayoGrid ? 1024 : 0);
+                
+                CellX = gridAreaID % 32;
                 CellY = value / 32;
                 UpdateBoundingBox();
             }

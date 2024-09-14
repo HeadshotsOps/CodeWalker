@@ -598,9 +598,9 @@ namespace CodeWalker
             this.WorldHeistWaterheckBox.Location = new System.Drawing.Point(8, 295);
             this.WorldHeistWaterheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.WorldHeistWaterheckBox.Name = "WorldHeistWaterheckBox";
-            this.WorldHeistWaterheckBox.Size = new System.Drawing.Size(195, 24);
+            this.WorldHeistWaterheckBox.Size = new System.Drawing.Size(183, 24);
             this.WorldHeistWaterheckBox.TabIndex = 72;
-            this.WorldHeistWaterheckBox.Text = "Use Cayo Perico water";
+            this.WorldHeistWaterheckBox.Text = "Cayo Water and Grid";
             this.WorldHeistWaterheckBox.UseVisualStyleBackColor = true;
             this.WorldHeistWaterheckBox.CheckedChanged += new System.EventHandler(this.WorldHeistWaterheckBox_CheckedChanged);
             // 

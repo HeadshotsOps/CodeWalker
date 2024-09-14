@@ -46,6 +46,7 @@
             this.YndAreaIDInfoLabel = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.YndRpfPathTextBox = new System.Windows.Forms.TextBox();
+            this.YndIsCayoGridCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.YndAreaIDYUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.YndAreaIDXUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.YndPedNodesUpDown)).BeginInit();
@@ -215,7 +216,7 @@
             // YndAreaIDInfoLabel
             // 
             this.YndAreaIDInfoLabel.AutoSize = true;
-            this.YndAreaIDInfoLabel.Location = new System.Drawing.Point(406, 31);
+            this.YndAreaIDInfoLabel.Location = new System.Drawing.Point(562, 34);
             this.YndAreaIDInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.YndAreaIDInfoLabel.Name = "YndAreaIDInfoLabel";
             this.YndAreaIDInfoLabel.Size = new System.Drawing.Size(43, 20);
@@ -243,11 +244,23 @@
             this.YndRpfPathTextBox.Size = new System.Drawing.Size(673, 26);
             this.YndRpfPathTextBox.TabIndex = 20;
             // 
+            // YndIsCayoGridCheckBox
+            // 
+            this.YndIsCayoGridCheckBox.AutoSize = true;
+            this.YndIsCayoGridCheckBox.Location = new System.Drawing.Point(405, 30);
+            this.YndIsCayoGridCheckBox.Name = "YndIsCayoGridCheckBox";
+            this.YndIsCayoGridCheckBox.Size = new System.Drawing.Size(122, 24);
+            this.YndIsCayoGridCheckBox.TabIndex = 37;
+            this.YndIsCayoGridCheckBox.Text = "Is Cayo Grid";
+            this.YndIsCayoGridCheckBox.UseVisualStyleBackColor = true;
+            this.YndIsCayoGridCheckBox.CheckedChanged += new System.EventHandler(this.YndIsCayoGridCheckBox_CheckedChanged);
+            // 
             // EditYndPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 768);
+            this.Controls.Add(this.YndIsCayoGridCheckBox);
             this.Controls.Add(this.label88);
             this.Controls.Add(this.YndAreaIDYUpDown);
             this.Controls.Add(this.label87);
@@ -297,5 +310,6 @@
         private System.Windows.Forms.Label YndAreaIDInfoLabel;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.TextBox YndRpfPathTextBox;
+        private System.Windows.Forms.CheckBox YndIsCayoGridCheckBox;
     }
 }
